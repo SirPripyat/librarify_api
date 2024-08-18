@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
    * <p>Captura erros de validação em campos de formulário e retorna um mapa contendo os campos
    * inválidos e suas mensagens de erro.</p>
    *
-   * @param ex Exceção lançada quando um argumento da função não é válido.
+   * @param ex Exceção lançada quando um argumento da função é inválida.
    * @return Um {@link ResponseEntity} contendo o mapa de erros e o status HTTP 400 (Bad Request).
    */
   @ExceptionHandler(MethodArgumentNotValidException.class)
