@@ -48,8 +48,8 @@ public class UserController {
   
   @PostMapping("/create")
   public ResponseEntity<User> create(@Valid @RequestBody CreateUserRequestDto requestDto) {
-    User userEntity = userMapper.toEntity(requestDto);
-    return ResponseEntity.ok(createUserService.create(userEntity));
+    User user = userMapper.toEntity(requestDto);
+    return ResponseEntity.ok(createUserService.create(user));
   }
   
   @GetMapping("/find-by-id/{id}")
