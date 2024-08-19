@@ -37,7 +37,7 @@ public class UserRepositoryAdapter implements UserRepository {
   }
   
   @Override
-  public Optional<User> findOneByIdAndStatusIsTrue(Long id) {
+  public Optional<User> findOneById(Long id) {
     Optional<UserEntity> userEntity = repository.findOneByIdAndStatusIsTrue(id);
     
     return userEntity.map(mapper::toDomain);
@@ -49,10 +49,4 @@ public class UserRepositoryAdapter implements UserRepository {
     return userEntities.map(mapper::toDomain);
   }
   
-  @Override
-  public Optional<User> findOneById(Long id) {
-    Optional<UserEntity> userEntity = repository.findOneById(id);
-    
-    return userEntity.map(mapper::toDomain);
-  }
 }

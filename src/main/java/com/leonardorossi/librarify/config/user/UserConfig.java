@@ -1,10 +1,7 @@
 package com.leonardorossi.librarify.config.user;
 
 import com.leonardorossi.librarify.application.user.gateways.UserRepository;
-import com.leonardorossi.librarify.application.user.usecase.CreateUserUseCase;
-import com.leonardorossi.librarify.application.user.usecase.DeleteOneUserUseCase;
-import com.leonardorossi.librarify.application.user.usecase.FindAllUsersUseCase;
-import com.leonardorossi.librarify.application.user.usecase.FindOneUserUseCase;
+import com.leonardorossi.librarify.application.user.usecase.*;
 import com.leonardorossi.librarify.infra.user.gateways.UserRepositoryAdapter;
 import com.leonardorossi.librarify.infra.user.mapper.UserEntityMapper;
 import com.leonardorossi.librarify.infra.user.persistence.UserJpaRepository;
@@ -33,9 +30,16 @@ public class UserConfig {
   
   @Bean
   DeleteOneUserUseCase deleteOneUserUseCase(
+      UserRepository userRepository, FindOneUserUseCase findOneUserUseCase
+  ) {
+    return new DeleteOneUserUseCase(userRepository, findOneUserUseCase);
+  }
+  
+  @Bean
+  UpdateOneUserUseCase updateOneUserUseCase(
       UserRepository userRepository
   ) {
-    return new DeleteOneUserUseCase(userRepository);
+    return new UpdateOneUserUseCase(userRepository);
   }
   
   @Bean

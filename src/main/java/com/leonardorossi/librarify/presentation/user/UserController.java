@@ -3,7 +3,7 @@ package com.leonardorossi.librarify.presentation.user;
 import com.leonardorossi.librarify.application.user.usecase.CreateUserUseCase;
 import com.leonardorossi.librarify.application.user.usecase.DeleteOneUserUseCase;
 import com.leonardorossi.librarify.application.user.usecase.FindAllUsersUseCase;
-import com.leonardorossi.librarify.application.user.usecase.FindOneActiveUser;
+import com.leonardorossi.librarify.application.user.usecase.FindOneUserUseCase;
 import com.leonardorossi.librarify.domain.user.entity.User;
 import com.leonardorossi.librarify.presentation.user.dtos.CreateUserRequestDto;
 import com.leonardorossi.librarify.presentation.user.mapper.UserRequestMapper;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
   
   private final CreateUserUseCase createUserService;
-  private final FindOneActiveUser findOneUserUseCase;
+  private final FindOneUserUseCase findOneUserUseCase;
   private final FindAllUsersUseCase findAllUsersUseCase;
   private final DeleteOneUserUseCase deleteOneUserUseCase;
   
@@ -39,7 +39,7 @@ public class UserController {
    */
   public UserController(
       CreateUserUseCase createUserService,
-      FindOneActiveUser findOneUserUseCase,
+      FindOneUserUseCase findOneUserUseCase,
       FindAllUsersUseCase findAllUsersUseCase,
       DeleteOneUserUseCase deleteOneUserUseCase,
       UserRequestMapper userMapper
