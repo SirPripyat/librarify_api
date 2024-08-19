@@ -18,6 +18,7 @@ public class UserRequestMapper {
    */
   public User toEntity(CreateUserRequestDto requestDto) {
     return new User(
+      null,
       requestDto.name(),
       requestDto.email(),
       requestDto.registrationDate(),

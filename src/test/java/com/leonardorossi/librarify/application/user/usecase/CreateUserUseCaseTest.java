@@ -28,6 +28,7 @@ public class CreateUserUseCaseTest {
   @Test
   void shouldCreateUserWhenEmailDoesNotExist() {
     User user = new User(
+      null,
       "Carlos",
       "carlos@mail.com",
       LocalDate.now(),
@@ -46,6 +47,7 @@ public class CreateUserUseCaseTest {
   @Test
   void shouldThrowCustomBadRequestExceptionWhenEmailAlreadyExists() {
     User user = new User(
+      null,
       "Carlos",
       "carlos@mail.com",
       LocalDate.now(),

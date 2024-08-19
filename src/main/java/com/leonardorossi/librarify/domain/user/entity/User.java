@@ -16,6 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+  private Long id;
   private String name;
   private String email;
   private LocalDate registrationDate;
