@@ -1,6 +1,7 @@
 package com.leonardorossi.librarify.presentation.user;
 
 import com.leonardorossi.librarify.application.user.usecase.CreateUserUseCase;
+import com.leonardorossi.librarify.application.user.usecase.DeleteOneUserUseCase;
 import com.leonardorossi.librarify.application.user.usecase.FindAllUsersUseCase;
 import com.leonardorossi.librarify.application.user.usecase.FindOneUserUseCase;
 import com.leonardorossi.librarify.domain.user.entity.User;
@@ -10,6 +11,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +30,8 @@ public class UserController {
   private final CreateUserUseCase createUserService;
   private final FindOneUserUseCase findOneUserUseCase;
   private final FindAllUsersUseCase findAllUsersUseCase;
+  private final DeleteOneUserUseCase deleteOneUserUseCase;
+  
   private final UserRequestMapper userMapper;
   
   /**
@@ -37,11 +41,13 @@ public class UserController {
       CreateUserUseCase createUserService,
       FindOneUserUseCase findOneUserUseCase,
       FindAllUsersUseCase findAllUsersUseCase,
+      DeleteOneUserUseCase deleteOneUserUseCase,
       UserRequestMapper userMapper
   ) {
     this.createUserService = createUserService;
     this.findOneUserUseCase = findOneUserUseCase;
     this.findAllUsersUseCase = findAllUsersUseCase;
+    this.deleteOneUserUseCase = deleteOneUserUseCase;
     this.userMapper = userMapper;
   }
   
@@ -61,4 +67,8 @@ public class UserController {
     return ResponseEntity.ok(findAllUsersUseCase.findAll(pageable));
   }
   
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<User> delete(@PathVariable Long id) {
+    return ResponseEntity.ok(deleteOneUserUseCase.toggleStatus(id));
+  }
 }

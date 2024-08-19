@@ -31,6 +31,6 @@ public class CreateUserUseCase {
       );
     }
     
-    return userRepository.create(user);
+    return userRepository.save(user);
   }
 }

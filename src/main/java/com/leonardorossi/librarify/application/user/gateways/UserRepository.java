@@ -10,11 +10,12 @@ import org.springframework.data.domain.Pageable;
  * Implementações desta interface devem lidar com operações relacionadas a usuários.
  */
 public interface UserRepository {
-  User create(User user);
+  User save(User user);
   
   boolean existsByEmail(String email);
   
   Optional<User> findById(Long id);
   
   Page<User> findAll(Pageable pageable);
+  
 }

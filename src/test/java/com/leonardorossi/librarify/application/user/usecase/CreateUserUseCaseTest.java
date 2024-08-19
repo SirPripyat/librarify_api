@@ -36,12 +36,12 @@ public class CreateUserUseCaseTest {
       true);
     
     when(userRepository.existsByEmail(user.getEmail())).thenReturn(false);
-    when(userRepository.create(user)).thenReturn(user);
+    when(userRepository.save(user)).thenReturn(user);
     
     User createdUser = createUserUseCase.create(user);
     
     assertEquals(user, createdUser);
-    verify(userRepository, times(1)).create(user);
+    verify(userRepository, times(1)).save(user);
   }
   
   @Test
@@ -62,7 +62,7 @@ public class CreateUserUseCaseTest {
 
     assertEquals(String.format(UserExceptionMessages.EMAIL_ALREADY_EXISTS, user.getEmail()),
       exception.getMessage());
-    verify(userRepository, never()).create(any(User.class));
+    verify(userRepository, never()).save(any(User.class));
   }
   
 }
