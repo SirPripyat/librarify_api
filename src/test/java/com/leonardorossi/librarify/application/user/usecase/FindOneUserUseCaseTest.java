@@ -18,13 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class FindOneActiveUserUseCaseTest {
+public class FindOneUserUseCaseTest {
   
   @Mock
   private UserRepository userRepository;
   
   @InjectMocks
-  private FindOneActiveUser findOneUserUseCase;
+  private FindOneUserUseCase findOneUserUseCase;
   
   private User mockUser;
   
@@ -40,7 +40,7 @@ public class FindOneActiveUserUseCaseTest {
   void shouldReturnAValidUserWhenIdExists() {
     long idUser = 1L;
     
-    when(userRepository.findOneByIdAndStatusIsTrue(idUser)).thenReturn(Optional.of(mockUser));
+    when(userRepository.findOneById(idUser)).thenReturn(Optional.of(mockUser));
     
     User result = findOneUserUseCase.findById(idUser);
     
@@ -51,7 +51,7 @@ public class FindOneActiveUserUseCaseTest {
   void shouldThrowExceptionWhenIdDoesNotExist() {
     long idUser = 1L;
     
-    when(userRepository.findOneByIdAndStatusIsTrue(idUser)).thenReturn(Optional.empty());
+    when(userRepository.findOneById(idUser)).thenReturn(Optional.empty());
     
     CustomBadRequestException exception = assertThrows(CustomBadRequestException.class, () ->
       findOneUserUseCase.findById(idUser)

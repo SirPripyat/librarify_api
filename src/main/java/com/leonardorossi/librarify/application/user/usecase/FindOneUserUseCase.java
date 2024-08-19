@@ -8,10 +8,10 @@ import com.leonardorossi.librarify.presentation.user.messages.UserExceptionMessa
 /**
  * Caso de uso para obter os detalhes de um único usuário ativo.
  */
-public class FindOneActiveUser {
+public class FindOneUserUseCase {
   private final UserRepository userRepository;
   
-  public FindOneActiveUser(UserRepository userRepository) {
+  public FindOneUserUseCase(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
   
@@ -23,7 +23,7 @@ public class FindOneActiveUser {
    * @throws CustomBadRequestException se o usuário não existir.
    */
   public User findById(Long id) {
-    return userRepository.findOneByIdAndStatusIsTrue(id)
+    return userRepository.findOneById(id)
       .orElseThrow(() -> new CustomBadRequestException(
           String.format(UserExceptionMessages.USER_NOT_FOUND, id)
         )
