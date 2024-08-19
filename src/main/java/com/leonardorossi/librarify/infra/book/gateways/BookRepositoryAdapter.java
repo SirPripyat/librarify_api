@@ -6,6 +6,8 @@ import com.leonardorossi.librarify.infra.book.mapper.BookMapper;
 import com.leonardorossi.librarify.infra.book.persistence.BookEntity;
 import com.leonardorossi.librarify.infra.book.persistence.BookJpaRepository;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Adaptador que implementa o repositório de livros para conectar a camada de domínio com a
@@ -36,6 +38,13 @@ public class BookRepositoryAdapter implements BookRepository {
   @Override
   public Optional<Book> findOneById(Long id) {
     Optional<BookEntity> bookEntity = repository.findOneById(id);
+    
+    return bookEntity.map(mapper::toDomain);
+  }
+  
+  @Override
+  public Page<Book> findAll(Pageable pageable) {
+    Page<BookEntity> bookEntity = repository.findAll(pageable);
     
     return bookEntity.map(mapper::toDomain);
   }

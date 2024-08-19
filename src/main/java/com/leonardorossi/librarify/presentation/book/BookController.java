@@ -1,11 +1,14 @@
 package com.leonardorossi.librarify.presentation.book;
 
 import com.leonardorossi.librarify.application.book.usecase.CreateBookUseCase;
+import com.leonardorossi.librarify.application.book.usecase.FindAllBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.FindOneBookUseCase;
 import com.leonardorossi.librarify.domain.book.entity.Book;
 import com.leonardorossi.librarify.presentation.book.dtos.CreateBookRequestDto;
 import com.leonardorossi.librarify.presentation.book.mapper.BookRequestMapper;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +27,7 @@ public class BookController {
   
   private final CreateBookUseCase createBookUseCase;
   private final FindOneBookUseCase findOneBookUseCase;
+  private final FindAllBookUseCase findAllBookUseCase;
   
   private final BookRequestMapper mapper;
   
@@ -33,10 +37,12 @@ public class BookController {
   public BookController(
       CreateBookUseCase createBookUseCase,
       FindOneBookUseCase findOneBookUseCase,
+      FindAllBookUseCase findAllBookUseCase,
       BookRequestMapper mapper
   ) {
     this.createBookUseCase = createBookUseCase;
     this.findOneBookUseCase = findOneBookUseCase;
+    this.findAllBookUseCase = findAllBookUseCase;
     this.mapper = mapper;
   }
   
@@ -53,5 +59,12 @@ public class BookController {
       @PathVariable Long id
   ) {
     return ResponseEntity.ok(findOneBookUseCase.find(id));
+  }
+  
+  @GetMapping("/find-all")
+  public ResponseEntity<Page<Book>> findAll(
+      Pageable pageable
+  ) {
+    return ResponseEntity.ok(findAllBookUseCase.findAll(pageable));
   }
 }
