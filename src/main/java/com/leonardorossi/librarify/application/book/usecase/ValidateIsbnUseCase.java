@@ -1,7 +1,6 @@
 package com.leonardorossi.librarify.application.book.usecase;
 
 import com.leonardorossi.librarify.infra.exception.CustomBadRequestException;
-import com.leonardorossi.librarify.presentation.book.messages.BookExceptionMessages;
 
 /**
  * Caso de uso responsável por validar um ISBN-10 e ISBN-13.
@@ -22,9 +21,7 @@ public class ValidateIsbnUseCase {
    */
   public boolean execute(String isbn) {
     if (isbn == null || (!isValidLength(isbn))) {
-      throw new CustomBadRequestException(
-        BookExceptionMessages.INVALID_ISBN
-      );
+      return false;
     }
     
     return (isbn.length() == ISBN_10_LENGTH) ? isValidIsbn10(isbn) : isValidIsbn13(isbn);
