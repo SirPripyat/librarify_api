@@ -13,8 +13,6 @@ import org.springframework.lang.NonNull;
 public interface UserJpaRepository extends JpaRepository<UserEntity, Long> {
   boolean existsByEmail(String email);
   
-  Optional<UserEntity> findOneByIdAndStatusIsTrue(Long id);
-  
   @NonNull
   Page<UserEntity> findAll(@NonNull Pageable pageable);
   
