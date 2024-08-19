@@ -18,13 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class FindOneUserUseCaseTest {
+public class FindOneActiveUserUseCaseTest {
   
   @Mock
   private UserRepository userRepository;
   
   @InjectMocks
-  private FindOneUserUseCase findOneUserUseCase;
+  private FindOneActiveUser findOneUserUseCase;
   
   private User mockUser;
   

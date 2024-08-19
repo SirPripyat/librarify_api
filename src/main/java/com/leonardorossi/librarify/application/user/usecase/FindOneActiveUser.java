@@ -6,12 +6,12 @@ import com.leonardorossi.librarify.infra.exception.CustomBadRequestException;
 import com.leonardorossi.librarify.presentation.user.messages.UserExceptionMessages;
 
 /**
- * Caso de uso para obter os detalhes de um único usuário.
+ * Caso de uso para obter os detalhes de um único usuário ativo.
  */
-public class FindOneUserUseCase {
+public class FindOneActiveUser {
   private final UserRepository userRepository;
   
-  public FindOneUserUseCase(UserRepository userRepository) {
+  public FindOneActiveUser(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
   
