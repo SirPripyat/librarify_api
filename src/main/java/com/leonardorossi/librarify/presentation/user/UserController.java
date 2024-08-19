@@ -1,6 +1,6 @@
 package com.leonardorossi.librarify.presentation.user;
 
-import com.leonardorossi.librarify.application.user.usecase.CreateUserUserCase;
+import com.leonardorossi.librarify.application.user.usecase.CreateUserUseCase;
 import com.leonardorossi.librarify.domain.user.entity.User;
 import com.leonardorossi.librarify.presentation.user.dtos.CreateUserRequestDto;
 import com.leonardorossi.librarify.presentation.user.mapper.UserRequestMapper;
@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
   
-  private final CreateUserUserCase createUserService;
+  private final CreateUserUseCase createUserService;
   private final UserRequestMapper userMapper;
   
-  public UserController(CreateUserUserCase createUserService, UserRequestMapper userMapper) {
+  public UserController(CreateUserUseCase createUserService, UserRequestMapper userMapper) {
     this.createUserService = createUserService;
     this.userMapper = userMapper;
   }

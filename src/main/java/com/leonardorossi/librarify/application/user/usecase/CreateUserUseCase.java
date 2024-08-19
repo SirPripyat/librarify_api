@@ -3,16 +3,17 @@ package com.leonardorossi.librarify.application.user.usecase;
 import com.leonardorossi.librarify.application.user.gateways.UserRepository;
 import com.leonardorossi.librarify.domain.user.entity.User;
 import com.leonardorossi.librarify.infra.exception.CustomBadRequestException;
+import com.leonardorossi.librarify.presentation.user.messages.UserExceptionMessages;
 
 /**
  * Caso de uso responsável por criar um novo usuário.
  * Verifica se um usuário com o e-mail fornecido já existe antes de salvar.
  */
-public class CreateUserUserCase {
+public class CreateUserUseCase {
   
   private final UserRepository userRepository;
   
-  public CreateUserUserCase(UserRepository userRepository) {
+  public CreateUserUseCase(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
   
@@ -26,7 +27,7 @@ public class CreateUserUserCase {
   public User create(User user) {
     if (userRepository.existsByEmail(user.getEmail())) {
       throw new CustomBadRequestException(
-        "User with email: " + user.getEmail() + " already exists."
+        String.format(UserExceptionMessages.EMAIL_ALREADY_EXISTS, user.getEmail())
       );
     }
     

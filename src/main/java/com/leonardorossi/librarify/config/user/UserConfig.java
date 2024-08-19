@@ -1,7 +1,7 @@
 package com.leonardorossi.librarify.config.user;
 
 import com.leonardorossi.librarify.application.user.gateways.UserRepository;
-import com.leonardorossi.librarify.application.user.usecase.CreateUserUserCase;
+import com.leonardorossi.librarify.application.user.usecase.CreateUserUseCase;
 import com.leonardorossi.librarify.infra.user.gateways.UserRepositoryAdapter;
 import com.leonardorossi.librarify.infra.user.mapper.UserEntityMapper;
 import com.leonardorossi.librarify.infra.user.persistence.UserJpaRepository;
@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class UserConfig {
   @Bean
-  CreateUserUserCase createUserUserCase(UserRepository repository) {
-    return new CreateUserUserCase(repository);
+  CreateUserUseCase createUserUserCase(UserRepository repository) {
+    return new CreateUserUseCase(repository);
   }
   
   @Bean
