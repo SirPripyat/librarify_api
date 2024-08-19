@@ -33,10 +33,9 @@ public class UserConfig {
   
   @Bean
   DeleteOneUserUseCase deleteOneUserUseCase(
-      UserRepository userRepository,
-      FindOneUserUseCase findOneUserUseCase
+      UserRepository userRepository
   ) {
-    return new DeleteOneUserUseCase(userRepository, findOneUserUseCase);
+    return new DeleteOneUserUseCase(userRepository);
   }
   
   @Bean

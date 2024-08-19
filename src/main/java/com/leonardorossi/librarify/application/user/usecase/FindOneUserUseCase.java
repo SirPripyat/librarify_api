@@ -23,10 +23,10 @@ public class FindOneUserUseCase {
    * @throws CustomBadRequestException se o usuário não existir.
    */
   public User findById(Long id) {
-    return userRepository.findById(id).orElseThrow(() ->
-      new CustomBadRequestException(
-        String.format(UserExceptionMessages.USER_NOT_FOUND, id)
-      )
+    return userRepository.findOneByIdAndStatusIsTrue(id)
+      .orElseThrow(() -> new CustomBadRequestException(
+          String.format(UserExceptionMessages.USER_NOT_FOUND, id)
+        )
     );
   }
 }

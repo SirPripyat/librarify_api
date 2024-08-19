@@ -38,9 +38,11 @@ public class FindOneUserUseCaseTest {
   
   @Test
   void shouldReturnAValidUserWhenIdExists() {
-    when(userRepository.findById(1L)).thenReturn(Optional.of(mockUser));
+    long idUser = 1L;
     
-    User result = findOneUserUseCase.findById(1L);
+    when(userRepository.findOneByIdAndStatusIsTrue(idUser)).thenReturn(Optional.of(mockUser));
+    
+    User result = findOneUserUseCase.findById(idUser);
     
     assertEquals(mockUser, result);
   }
@@ -49,7 +51,7 @@ public class FindOneUserUseCaseTest {
   void shouldThrowExceptionWhenIdDoesNotExist() {
     long idUser = 1L;
     
-    when(userRepository.findById(idUser)).thenReturn(Optional.empty());
+    when(userRepository.findOneByIdAndStatusIsTrue(idUser)).thenReturn(Optional.empty());
     
     CustomBadRequestException exception = assertThrows(CustomBadRequestException.class, () ->
       findOneUserUseCase.findById(idUser)

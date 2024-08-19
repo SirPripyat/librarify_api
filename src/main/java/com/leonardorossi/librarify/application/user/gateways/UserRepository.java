@@ -14,8 +14,9 @@ public interface UserRepository {
   
   boolean existsByEmail(String email);
   
-  Optional<User> findById(Long id);
+  Optional<User> findOneByIdAndStatusIsTrue(Long id);
   
   Page<User> findAll(Pageable pageable);
   
+  Optional<User> findOneById(Long id);
 }
