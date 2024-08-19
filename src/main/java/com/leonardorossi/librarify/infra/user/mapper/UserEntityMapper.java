@@ -19,6 +19,7 @@ public class UserEntityMapper {
    */
   public UserEntity toEntity(User user) {
     return UserEntity.builder()
+      .id(user.getId())
       .name(user.getName())
       .email(user.getEmail())
       .registrationDate(user.getRegistrationDate())
@@ -35,6 +36,7 @@ public class UserEntityMapper {
    */
   public User toDomain(UserEntity userEntity) {
     return User.builder()
+      .id(userEntity.getId())
       .name(userEntity.getName())
       .email(userEntity.getEmail())
       .registrationDate(userEntity.getRegistrationDate())
@@ -42,4 +44,5 @@ public class UserEntityMapper {
       .status(userEntity.getStatus())
       .build();
   }
+  
 }

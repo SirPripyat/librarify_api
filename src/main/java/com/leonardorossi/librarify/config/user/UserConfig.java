@@ -2,6 +2,7 @@ package com.leonardorossi.librarify.config.user;
 
 import com.leonardorossi.librarify.application.user.gateways.UserRepository;
 import com.leonardorossi.librarify.application.user.usecase.CreateUserUseCase;
+import com.leonardorossi.librarify.application.user.usecase.FindAllUsersUseCase;
 import com.leonardorossi.librarify.application.user.usecase.FindOneUserUseCase;
 import com.leonardorossi.librarify.infra.user.gateways.UserRepositoryAdapter;
 import com.leonardorossi.librarify.infra.user.mapper.UserEntityMapper;
@@ -22,6 +23,11 @@ public class UserConfig {
   @Bean
   FindOneUserUseCase findOneUserUseCase(UserRepository repository) {
     return new FindOneUserUseCase(repository);
+  }
+  
+  @Bean
+  FindAllUsersUseCase findAllUsersUseCase(UserRepository repository) {
+    return new FindAllUsersUseCase(repository);
   }
   
   @Bean

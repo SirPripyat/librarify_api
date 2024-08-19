@@ -1,11 +1,14 @@
 package com.leonardorossi.librarify.presentation.user;
 
 import com.leonardorossi.librarify.application.user.usecase.CreateUserUseCase;
+import com.leonardorossi.librarify.application.user.usecase.FindAllUsersUseCase;
 import com.leonardorossi.librarify.application.user.usecase.FindOneUserUseCase;
 import com.leonardorossi.librarify.domain.user.entity.User;
 import com.leonardorossi.librarify.presentation.user.dtos.CreateUserRequestDto;
 import com.leonardorossi.librarify.presentation.user.mapper.UserRequestMapper;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,11 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
  * Esta classe contém endpoints para operação de CRUD dos usuários.
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
   
   private final CreateUserUseCase createUserService;
   private final FindOneUserUseCase findOneUserUseCase;
+  private final FindAllUsersUseCase findAllUsersUseCase;
   private final UserRequestMapper userMapper;
   
   /**
@@ -32,10 +36,12 @@ public class UserController {
   public UserController(
       CreateUserUseCase createUserService,
       FindOneUserUseCase findOneUserUseCase,
+      FindAllUsersUseCase findAllUsersUseCase,
       UserRequestMapper userMapper
   ) {
     this.createUserService = createUserService;
     this.findOneUserUseCase = findOneUserUseCase;
+    this.findAllUsersUseCase = findAllUsersUseCase;
     this.userMapper = userMapper;
   }
   
@@ -48,6 +54,11 @@ public class UserController {
   @GetMapping("/find-by-id/{id}")
   public ResponseEntity<User> findById(@PathVariable Long id) {
     return ResponseEntity.ok(findOneUserUseCase.findById(id));
+  }
+  
+  @GetMapping("/find-all")
+  public ResponseEntity<Page<User>> findAll(Pageable pageable) {
+    return ResponseEntity.ok(findAllUsersUseCase.findAll(pageable));
   }
   
 }

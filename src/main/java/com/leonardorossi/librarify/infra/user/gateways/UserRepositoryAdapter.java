@@ -6,6 +6,8 @@ import com.leonardorossi.librarify.infra.user.mapper.UserEntityMapper;
 import com.leonardorossi.librarify.infra.user.persistence.UserEntity;
 import com.leonardorossi.librarify.infra.user.persistence.UserJpaRepository;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Adaptador que implementa o repositório de usuários para conectar a camada de domínio com a
@@ -39,5 +41,11 @@ public class UserRepositoryAdapter implements UserRepository {
     Optional<UserEntity> userEntity = repository.findOneByIdAndStatusIsTrue(id);
     
     return userEntity.map(mapper::toDomain);
+  }
+  
+  @Override
+  public Page<User> findAll(Pageable pageable) {
+    Page<UserEntity> userEntities = repository.findAll(pageable);
+    return userEntities.map(mapper::toDomain);
   }
 }
