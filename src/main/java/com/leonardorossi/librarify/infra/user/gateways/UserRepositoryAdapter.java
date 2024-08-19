@@ -5,6 +5,7 @@ import com.leonardorossi.librarify.domain.user.entity.User;
 import com.leonardorossi.librarify.infra.user.mapper.UserEntityMapper;
 import com.leonardorossi.librarify.infra.user.persistence.UserEntity;
 import com.leonardorossi.librarify.infra.user.persistence.UserJpaRepository;
+import java.util.Optional;
 
 /**
  * Adaptador que implementa o repositório de usuários para conectar a camada de domínio com a
@@ -31,5 +32,12 @@ public class UserRepositoryAdapter implements UserRepository {
   @Override
   public boolean existsByEmail(String email) {
     return repository.existsByEmail(email);
+  }
+  
+  @Override
+  public Optional<User> findById(Long id) {
+    Optional<UserEntity> userEntity = repository.findOneByIdAndStatusIsTrue(id);
+    
+    return userEntity.map(mapper::toDomain);
   }
 }
