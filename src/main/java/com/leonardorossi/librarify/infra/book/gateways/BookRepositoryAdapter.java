@@ -5,6 +5,7 @@ import com.leonardorossi.librarify.domain.book.entity.Book;
 import com.leonardorossi.librarify.infra.book.mapper.BookMapper;
 import com.leonardorossi.librarify.infra.book.persistence.BookEntity;
 import com.leonardorossi.librarify.infra.book.persistence.BookJpaRepository;
+import java.util.Optional;
 
 /**
  * Adaptador que implementa o repositório de livros para conectar a camada de domínio com a
@@ -30,5 +31,12 @@ public class BookRepositoryAdapter implements BookRepository {
   @Override
   public boolean existsByIsbn(String isbn) {
     return repository.existsByIsbn(isbn);
+  }
+  
+  @Override
+  public Optional<Book> findOneById(Long id) {
+    Optional<BookEntity> bookEntity = repository.findOneById(id);
+    
+    return bookEntity.map(mapper::toDomain);
   }
 }
