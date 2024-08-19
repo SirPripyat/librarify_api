@@ -2,6 +2,7 @@ package com.leonardorossi.librarify.presentation.user.mapper;
 
 import com.leonardorossi.librarify.domain.user.entity.User;
 import com.leonardorossi.librarify.presentation.user.dtos.CreateUserRequestDto;
+import com.leonardorossi.librarify.presentation.user.dtos.UpdateUserRequestDto;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,5 +26,19 @@ public class UserRequestMapper {
       requestDto.phone(),
       true
     );
+  }
+  
+  /**
+   * Converte um {@link UpdateUserRequestDto} para um {@link User}.
+   *
+   * @param requestDto Dados de entrada para atualizar um usuário.
+   * @return A entidade {@link User} atualizada.
+   */
+  public User toEntity(UpdateUserRequestDto requestDto) {
+    return User.builder()
+      .name(requestDto.name())
+      .email(requestDto.email())
+      .phone(requestDto.phone())
+      .build();
   }
 }
