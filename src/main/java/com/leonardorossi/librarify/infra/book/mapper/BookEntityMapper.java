@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * persistência {@link BookEntity}.
  */
 @Component
-public class BookMapper {
+public class BookEntityMapper {
   
   /**
    * Converte um {@link Book} para um {@link BookEntity}.

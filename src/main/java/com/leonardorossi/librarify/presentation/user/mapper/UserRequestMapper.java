@@ -41,4 +41,16 @@ public class UserRequestMapper {
       .phone(requestDto.phone())
       .build();
   }
+  
+  /**
+   * Converte um Id de Usuário para um {@link User}.
+   *
+   * @param idUser Id de um usuário.
+   * @return A entidade {@link User} atualizada.
+   */
+  public User toEntity(Long idUser) {
+    return User.builder()
+      .id(idUser)
+      .build();
+  }
 }

@@ -41,4 +41,16 @@ public class BookRequestMapper {
       .category(requestDto.category())
       .build();
   }
+  
+  /**
+   * Converte um Id de Livro para um {@link Book}.
+   *
+   * @param idBook Id de um livro.
+   * @return A entidade {@link Book} atualizada.
+   */
+  public Book toEntity(Long idBook) {
+    return Book.builder()
+      .id(idBook)
+      .build();
+  }
 }

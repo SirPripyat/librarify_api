@@ -8,7 +8,7 @@ import com.leonardorossi.librarify.application.book.usecase.FindOneBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.UpdateOneBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.ValidateIsbnUseCase;
 import com.leonardorossi.librarify.infra.book.gateways.BookRepositoryAdapter;
-import com.leonardorossi.librarify.infra.book.mapper.BookMapper;
+import com.leonardorossi.librarify.infra.book.mapper.BookEntityMapper;
 import com.leonardorossi.librarify.infra.book.persistence.BookJpaRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -68,7 +68,7 @@ public class BookConfig {
   
   @Bean
   BookRepositoryAdapter bookRepositoryAdapter(
-      BookJpaRepository bookJpaRepository, BookMapper bookMapper
+      BookJpaRepository bookJpaRepository, BookEntityMapper bookMapper
   ) {
     return new BookRepositoryAdapter(bookJpaRepository, bookMapper);
   }

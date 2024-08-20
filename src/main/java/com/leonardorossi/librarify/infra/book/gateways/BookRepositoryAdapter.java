@@ -2,7 +2,7 @@ package com.leonardorossi.librarify.infra.book.gateways;
 
 import com.leonardorossi.librarify.application.book.gateways.BookRepository;
 import com.leonardorossi.librarify.domain.book.entity.Book;
-import com.leonardorossi.librarify.infra.book.mapper.BookMapper;
+import com.leonardorossi.librarify.infra.book.mapper.BookEntityMapper;
 import com.leonardorossi.librarify.infra.book.persistence.BookEntity;
 import com.leonardorossi.librarify.infra.book.persistence.BookJpaRepository;
 import java.util.Optional;
@@ -17,9 +17,9 @@ import org.springframework.data.domain.Pageable;
 public class BookRepositoryAdapter implements BookRepository {
   
   private final BookJpaRepository repository;
-  private final BookMapper mapper;
+  private final BookEntityMapper mapper;
   
-  public BookRepositoryAdapter(BookJpaRepository bookJpaRepository, BookMapper bookMapper) {
+  public BookRepositoryAdapter(BookJpaRepository bookJpaRepository, BookEntityMapper bookMapper) {
     this.repository = bookJpaRepository;
     this.mapper = bookMapper;
   }
