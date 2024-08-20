@@ -17,7 +17,7 @@ public class DeleteOneBookUseCaseTest {
   @Mock
   private BookRepository bookRepository;
   
-  @InjectMocks
+  @Mock
   private FindOneBookUseCase findOneBookUseCase;
   
   @InjectMocks
