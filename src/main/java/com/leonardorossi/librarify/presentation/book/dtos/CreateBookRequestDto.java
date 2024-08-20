@@ -24,6 +24,7 @@ public record CreateBookRequestDto(
     String title,
     
     @NotBlank(message = BookValidationMessages.AUTHOR_NOT_BLANK)
+    @Size(max = 255, message = BookValidationMessages.AUTHOR_SIZE)
     String author,
     
     @NotBlank(message = BookValidationMessages.ISBN_NOT_BLANK)
@@ -34,6 +35,7 @@ public record CreateBookRequestDto(
     LocalDate publicationDate,
     
     @NotBlank(message = BookValidationMessages.CATEGORY_NOT_BLANK)
+    @Size(max = 50, message = BookValidationMessages.CATEGORY_SIZE)
     String category
 ) {
 }
