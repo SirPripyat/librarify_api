@@ -20,8 +20,8 @@ public class FindLastBooksCheckedOutByUserUseCase {
   /**
     * Busca os últimos livros emprestados por um usuário.
    */
-  public List<Book> find(Long userId, int limit) {
-    return loanRepository.findLastBooksCheckOutByUser(userId, limit).orElseThrow(() ->
+  public List<Book> find(Long userId) {
+    return loanRepository.findLastBooksCheckOutByUser(userId).orElseThrow(() ->
       new CustomBadRequestException(
         String.format(LoanExceptionMessages.USER_DONT_HAVE_LOANS, userId)
       ));

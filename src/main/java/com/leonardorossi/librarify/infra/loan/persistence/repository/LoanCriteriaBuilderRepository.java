@@ -9,5 +9,5 @@ import java.util.Optional;
  * Repositório JPA para realizar operações de persistência na entidade {@link LoanEntity}.
  */
 public interface LoanCriteriaBuilderRepository {
-  Optional<List<BookEntity>> findLastBooksCheckOutByUser(Long userId, int limit);
+  Optional<List<BookEntity>> findLastBooksCheckOutByUser(Long userId);
 }

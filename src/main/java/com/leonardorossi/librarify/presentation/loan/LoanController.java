@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -58,10 +57,9 @@ public class LoanController {
   
   @GetMapping("/last/{idUser}")
   public ResponseEntity<List<Book>> findLastBooksCheckOutByUser(
-      @PathVariable Long idUser,
-      @RequestParam(value = "limit", defaultValue = "20") int limit
+      @PathVariable Long idUser
   ) {
-    return ResponseEntity.ok(findLastBooksCheckedOutByUserUseCase.find(idUser, limit));
+    return ResponseEntity.ok(findLastBooksCheckedOutByUserUseCase.find(idUser));
   }
   
   /**

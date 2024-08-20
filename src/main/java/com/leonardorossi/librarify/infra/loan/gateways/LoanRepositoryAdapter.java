@@ -48,8 +48,8 @@ public class LoanRepositoryAdapter implements LoanRepository {
   }
   
   @Override
-  public Optional<List<Book>> findLastBooksCheckOutByUser(Long userId, int limit) {
-    return repository.findLastBooksCheckOutByUser(userId, limit)
+  public Optional<List<Book>> findLastBooksCheckOutByUser(Long userId) {
+    return repository.findLastBooksCheckOutByUser(userId)
       .map(bookEntities -> bookEntities.stream()
         .map(bookEntityMapper::toDomain)
         .toList());

@@ -22,13 +22,15 @@ public class LoanCriteriaBuilderRepositoryImpl implements LoanCriteriaBuilderRep
   
   private final EntityManager entityManager;
   
+  private static final int MAX_RESULTS = 20;
+  
   @Autowired
   public LoanCriteriaBuilderRepositoryImpl(EntityManager entityManager) {
     this.entityManager = entityManager;
   }
   
   @Override
-  public Optional<List<BookEntity>> findLastBooksCheckOutByUser(Long userId, int limit) {
+  public Optional<List<BookEntity>> findLastBooksCheckOutByUser(Long userId) {
     CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
     CriteriaQuery<BookEntity> query = criteriaBuilder.createQuery(BookEntity.class);
     Root<UserEntity> userEntityRoot = query.from(UserEntity.class);
@@ -41,7 +43,7 @@ public class LoanCriteriaBuilderRepositoryImpl implements LoanCriteriaBuilderRep
         .orderBy(criteriaBuilder.desc(loanEntityJoin.get("id")));
       
     return Optional.ofNullable(entityManager.createQuery(query)
-      .setMaxResults(limit)
+      .setMaxResults(MAX_RESULTS)
       .getResultList());
   }
 

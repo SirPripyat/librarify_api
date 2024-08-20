@@ -14,5 +14,5 @@ public interface LoanRepository {
   
   Optional<Loan> findOneById(Long id);
   
-  Optional<List<Book>> findLastBooksCheckOutByUser(Long userId, int limit);
+  Optional<List<Book>> findLastBooksCheckOutByUser(Long userId);
 }
