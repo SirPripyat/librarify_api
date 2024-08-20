@@ -4,6 +4,7 @@ import com.leonardorossi.librarify.application.book.gateways.BookRepository;
 import com.leonardorossi.librarify.application.book.usecase.CreateBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.FindAllBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.FindOneBookUseCase;
+import com.leonardorossi.librarify.application.book.usecase.UpdateOneBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.ValidateIsbnUseCase;
 import com.leonardorossi.librarify.infra.book.gateways.BookRepositoryAdapter;
 import com.leonardorossi.librarify.infra.book.mapper.BookMapper;
@@ -40,6 +41,17 @@ public class BookConfig {
   @Bean
   FindAllBookUseCase findAllBookUseCase(BookRepository bookRepository) {
     return new FindAllBookUseCase(bookRepository);
+  }
+  
+  @Bean
+  UpdateOneBookUseCase updateOneBookUseCase(
+      BookRepository bookRepository,
+      FindOneBookUseCase findOneBookUseCase
+  ) {
+    return new UpdateOneBookUseCase(
+      bookRepository,
+      findOneBookUseCase
+    );
   }
   
   @Bean

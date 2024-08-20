@@ -2,6 +2,7 @@ package com.leonardorossi.librarify.presentation.book.mapper;
 
 import com.leonardorossi.librarify.domain.book.entity.Book;
 import com.leonardorossi.librarify.presentation.book.dtos.CreateBookRequestDto;
+import com.leonardorossi.librarify.presentation.book.dtos.UpdateBookRequestDto;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,6 +25,20 @@ public class BookRequestMapper {
       .publicationDate(requestDto.publicationDate())
       .category(requestDto.category())
       .status(true)
+      .build();
+  }
+  
+  /**
+   * Converte um {@link UpdateBookRequestDto} para um {@link Book}.
+   *
+   * @param requestDto Dados de entrada para criar um usuário.
+   * @return A entidade {@link Book} criada.
+   */
+  public Book toEntity(UpdateBookRequestDto requestDto) {
+    return Book.builder()
+      .title(requestDto.title())
+      .author(requestDto.author())
+      .category(requestDto.category())
       .build();
   }
 }
