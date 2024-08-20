@@ -22,6 +22,7 @@ public class UpdateOneUserUseCase {
   /**
    * Atualiza os detalhes de um único usuário.
    *
+   * @param id o id do usuário a ser atualizado
    * @param user a entidade do usuário a ser atualizada
    * @return a entidade do usuário atualizada
    */
