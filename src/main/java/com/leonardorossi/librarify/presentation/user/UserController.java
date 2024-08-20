@@ -1,6 +1,10 @@
 package com.leonardorossi.librarify.presentation.user;
 
-import com.leonardorossi.librarify.application.user.usecase.*;
+import com.leonardorossi.librarify.application.user.usecase.CreateUserUseCase;
+import com.leonardorossi.librarify.application.user.usecase.DeleteOneUserUseCase;
+import com.leonardorossi.librarify.application.user.usecase.FindAllUsersUseCase;
+import com.leonardorossi.librarify.application.user.usecase.FindOneUserUseCase;
+import com.leonardorossi.librarify.application.user.usecase.UpdateOneUserUseCase;
 import com.leonardorossi.librarify.domain.user.entity.User;
 import com.leonardorossi.librarify.presentation.user.dtos.CreateUserRequestDto;
 import com.leonardorossi.librarify.presentation.user.dtos.UpdateUserRequestDto;
@@ -9,7 +13,14 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controlador responsável por gerenciar as operações relacionadas aos usuários.
@@ -70,7 +81,7 @@ public class UserController {
   /**
    * Atualiza os detalhes de um único usuário.
    */
-  @PatchMapping("/update/{id}")
+  @PutMapping("/update/{id}")
   public ResponseEntity<User> update(
       @PathVariable Long id,
       @Valid @RequestBody UpdateUserRequestDto requestDto
