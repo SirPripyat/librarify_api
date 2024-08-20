@@ -3,6 +3,7 @@ package com.leonardorossi.librarify.presentation.loan.mapper;
 import com.leonardorossi.librarify.domain.loan.entity.Loan;
 import com.leonardorossi.librarify.presentation.book.mapper.BookRequestMapper;
 import com.leonardorossi.librarify.presentation.loan.dtos.CreateLoanRequestDto;
+import com.leonardorossi.librarify.presentation.loan.dtos.UpdateLoanRequestDto;
 import com.leonardorossi.librarify.presentation.user.mapper.UserRequestMapper;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +35,21 @@ public class LoanRequestMapper {
       .user(userRequestMapper.toEntity(requestDto.idUser()))
       .book(bookRequestMapper.toEntity(requestDto.idBook()))
       .loanDate(requestDto.loanDate())
+      .returnDate(requestDto.returnDate())
+      .loanStatus(requestDto.status())
+      .build();
+  }
+  
+  /**
+   * Converte um {@link UpdateLoanRequestDto} para um {@link Loan}.
+   *
+   * @param requestDto Dados de entrada para criar um usuário.
+   * @return A entidade {@link Loan} criada.
+   */
+  public Loan toEntity(UpdateLoanRequestDto requestDto) {
+    return Loan.builder()
+      .user(userRequestMapper.toEntity(requestDto.idUser()))
+      .book(bookRequestMapper.toEntity(requestDto.idBook()))
       .returnDate(requestDto.returnDate())
       .loanStatus(requestDto.status())
       .build();

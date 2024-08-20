@@ -1,6 +1,7 @@
 package com.leonardorossi.librarify.application.loan.gateways;
 
 import com.leonardorossi.librarify.domain.loan.entity.Loan;
+import java.util.Optional;
 
 /**
  * Interface que define o contrato do repositório de empréstimos.
@@ -8,4 +9,6 @@ import com.leonardorossi.librarify.domain.loan.entity.Loan;
  */
 public interface LoanRepository {
   Loan save(Loan loan);
+  
+  Optional<Loan> findOneById(Long id);
 }

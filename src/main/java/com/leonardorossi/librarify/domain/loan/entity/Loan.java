@@ -1,7 +1,7 @@
 package com.leonardorossi.librarify.domain.loan.entity;
 
 import com.leonardorossi.librarify.domain.book.entity.Book;
-import com.leonardorossi.librarify.domain.loan.entity.enums.LoanStatusEnum;
+import com.leonardorossi.librarify.domain.loan.enums.LoanStatusEnum;
 import com.leonardorossi.librarify.domain.user.entity.User;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;

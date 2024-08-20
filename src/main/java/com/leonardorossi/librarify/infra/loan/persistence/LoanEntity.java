@@ -1,6 +1,6 @@
 package com.leonardorossi.librarify.infra.loan.persistence;
 
-import com.leonardorossi.librarify.domain.loan.entity.enums.LoanStatusEnum;
+import com.leonardorossi.librarify.domain.loan.enums.LoanStatusEnum;
 import com.leonardorossi.librarify.infra.book.persistence.BookEntity;
 import com.leonardorossi.librarify.infra.user.persistence.UserEntity;
 import jakarta.persistence.Column;

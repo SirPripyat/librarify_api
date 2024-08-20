@@ -1,4 +1,4 @@
-package com.leonardorossi.librarify.domain.loan.entity.enums;
+package com.leonardorossi.librarify.domain.loan.enums;
 
 import lombok.Getter;
 

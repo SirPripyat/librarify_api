@@ -5,6 +5,7 @@ import com.leonardorossi.librarify.domain.loan.entity.Loan;
 import com.leonardorossi.librarify.infra.loan.mapper.LoanEntityMapper;
 import com.leonardorossi.librarify.infra.loan.persistence.LoanEntity;
 import com.leonardorossi.librarify.infra.loan.persistence.LoanJpaRepository;
+import java.util.Optional;
 
 /**
  * Adaptador que implementa o repositório de empréstimos para conectar a camada de domínio com a
@@ -28,5 +29,11 @@ public class LoanRepositoryAdapter implements LoanRepository {
     LoanEntity loanEntity = mapper.toEntity(loan);
     
     return mapper.toDomain(repository.save(loanEntity));
+  }
+  
+  @Override
+  public Optional<Loan> findOneById(Long id) {
+    Optional<LoanEntity> loanEntity = repository.findOneById(id);
+    return loanEntity.map(mapper::toDomain);
   }
 }

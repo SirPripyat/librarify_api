@@ -5,7 +5,7 @@ import com.leonardorossi.librarify.application.loan.gateways.LoanRepository;
 import com.leonardorossi.librarify.application.user.usecase.FindOneUserUseCase;
 import com.leonardorossi.librarify.domain.book.entity.Book;
 import com.leonardorossi.librarify.domain.loan.entity.Loan;
-import com.leonardorossi.librarify.domain.loan.entity.enums.LoanStatusEnum;
+import com.leonardorossi.librarify.domain.loan.enums.LoanStatusEnum;
 import com.leonardorossi.librarify.domain.user.entity.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

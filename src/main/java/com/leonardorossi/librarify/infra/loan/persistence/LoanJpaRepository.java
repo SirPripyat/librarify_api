@@ -1,5 +1,6 @@
 package com.leonardorossi.librarify.infra.loan.persistence;
 
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -7,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Fornece métodos padrão do Spring Data JPA e consultas personalizadas.
  */
 public interface LoanJpaRepository extends JpaRepository<LoanEntity, Long> {
+  Optional<LoanEntity> findOneById(Long idLoan);
 }
