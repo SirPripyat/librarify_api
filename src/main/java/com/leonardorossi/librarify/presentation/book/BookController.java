@@ -1,6 +1,7 @@
 package com.leonardorossi.librarify.presentation.book;
 
 import com.leonardorossi.librarify.application.book.usecase.CreateBookUseCase;
+import com.leonardorossi.librarify.application.book.usecase.DeleteOneBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.FindAllBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.FindOneBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.UpdateOneBookUseCase;
@@ -12,6 +13,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +34,7 @@ public class BookController {
   private final FindOneBookUseCase findOneBookUseCase;
   private final FindAllBookUseCase findAllBookUseCase;
   private final UpdateOneBookUseCase updateOneBookUseCase;
+  private final DeleteOneBookUseCase deleteOneBookUseCase;
   
   private final BookRequestMapper mapper;
   
@@ -43,12 +46,14 @@ public class BookController {
       FindOneBookUseCase findOneBookUseCase,
       FindAllBookUseCase findAllBookUseCase,
       UpdateOneBookUseCase updateOneBookUseCase,
+      DeleteOneBookUseCase deleteOneBookUseCase,
       BookRequestMapper mapper
   ) {
     this.createBookUseCase = createBookUseCase;
     this.findOneBookUseCase = findOneBookUseCase;
     this.findAllBookUseCase = findAllBookUseCase;
     this.updateOneBookUseCase = updateOneBookUseCase;
+    this.deleteOneBookUseCase = deleteOneBookUseCase;
     this.mapper = mapper;
   }
   
@@ -74,6 +79,13 @@ public class BookController {
     return ResponseEntity.ok(findAllBookUseCase.findAll(pageable));
   }
   
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<Book> deleteBook(
+      @PathVariable Long id
+  ) {
+    return ResponseEntity.ok(deleteOneBookUseCase.toggleStatus(id));
+  }
+  
   /**
    * Atualiza os detalhes de um único livro.
    */
@@ -85,4 +97,5 @@ public class BookController {
     Book book = mapper.toEntity(requestDto);
     return ResponseEntity.ok(updateOneBookUseCase.update(id, book));
   }
+  
 }

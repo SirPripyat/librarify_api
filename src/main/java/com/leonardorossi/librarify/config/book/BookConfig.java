@@ -2,6 +2,7 @@ package com.leonardorossi.librarify.config.book;
 
 import com.leonardorossi.librarify.application.book.gateways.BookRepository;
 import com.leonardorossi.librarify.application.book.usecase.CreateBookUseCase;
+import com.leonardorossi.librarify.application.book.usecase.DeleteOneBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.FindAllBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.FindOneBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.UpdateOneBookUseCase;
@@ -49,6 +50,17 @@ public class BookConfig {
       FindOneBookUseCase findOneBookUseCase
   ) {
     return new UpdateOneBookUseCase(
+      bookRepository,
+      findOneBookUseCase
+    );
+  }
+  
+  @Bean
+  DeleteOneBookUseCase deleteOneBookUseCase(
+      BookRepository bookRepository,
+      FindOneBookUseCase findOneBookUseCase
+  ) {
+    return new DeleteOneBookUseCase(
       bookRepository,
       findOneBookUseCase
     );
