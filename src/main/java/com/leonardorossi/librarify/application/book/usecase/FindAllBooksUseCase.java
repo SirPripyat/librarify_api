@@ -2,7 +2,7 @@ package com.leonardorossi.librarify.application.book.usecase;
 
 import com.leonardorossi.librarify.application.book.gateways.BookRepository;
 import com.leonardorossi.librarify.domain.book.entity.Book;
-import com.leonardorossi.librarify.infra.exception.CustomNoContentRequestException;
+import com.leonardorossi.librarify.infra.exception.CustomBadRequestException;
 import com.leonardorossi.librarify.presentation.book.messages.BookExceptionMessages;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,7 +41,7 @@ public class FindAllBooksUseCase {
    */
   private void validateBookDoesNotExist(Page<Book> books) {
     if (books.isEmpty()) {
-      throw new CustomNoContentRequestException(BookExceptionMessages.PAGINATED_BOOKS_NOT_FOUND);
+      throw new CustomBadRequestException(BookExceptionMessages.PAGINATED_BOOKS_NOT_FOUND);
     }
   }
 }

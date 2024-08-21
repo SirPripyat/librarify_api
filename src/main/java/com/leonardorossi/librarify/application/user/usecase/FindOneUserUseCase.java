@@ -3,7 +3,6 @@ package com.leonardorossi.librarify.application.user.usecase;
 import com.leonardorossi.librarify.application.user.gateways.UserRepository;
 import com.leonardorossi.librarify.domain.user.entity.User;
 import com.leonardorossi.librarify.infra.exception.CustomBadRequestException;
-import com.leonardorossi.librarify.infra.exception.CustomNoContentRequestException;
 import com.leonardorossi.librarify.presentation.user.messages.UserExceptionMessages;
 
 /**
@@ -39,8 +38,8 @@ public class FindOneUserUseCase {
    * @param id o ID do usuário não encontrado
    * @return a exceção customizada
    */
-  private CustomNoContentRequestException bookNotFoundException(Long id) {
-    return new CustomNoContentRequestException(
+  private CustomBadRequestException bookNotFoundException(Long id) {
+    return new CustomBadRequestException(
       String.format(UserExceptionMessages.USER_NOT_FOUND, id)
     );
   }
