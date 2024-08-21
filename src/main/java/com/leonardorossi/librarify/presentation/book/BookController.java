@@ -2,7 +2,7 @@ package com.leonardorossi.librarify.presentation.book;
 
 import com.leonardorossi.librarify.application.book.usecase.CreateBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.DeleteOneBookUseCase;
-import com.leonardorossi.librarify.application.book.usecase.FindAllBookUseCase;
+import com.leonardorossi.librarify.application.book.usecase.FindAllBooksUseCase;
 import com.leonardorossi.librarify.application.book.usecase.FindOneBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.UpdateOneBookUseCase;
 import com.leonardorossi.librarify.domain.book.entity.Book;
@@ -32,7 +32,7 @@ public class BookController {
   
   private final CreateBookUseCase createBookUseCase;
   private final FindOneBookUseCase findOneBookUseCase;
-  private final FindAllBookUseCase findAllBookUseCase;
+  private final FindAllBooksUseCase findAllBooksUseCase;
   private final UpdateOneBookUseCase updateOneBookUseCase;
   private final DeleteOneBookUseCase deleteOneBookUseCase;
   
@@ -44,14 +44,14 @@ public class BookController {
   public BookController(
       CreateBookUseCase createBookUseCase,
       FindOneBookUseCase findOneBookUseCase,
-      FindAllBookUseCase findAllBookUseCase,
+      FindAllBooksUseCase findAllBooksUseCase,
       UpdateOneBookUseCase updateOneBookUseCase,
       DeleteOneBookUseCase deleteOneBookUseCase,
       BookRequestMapper mapper
   ) {
     this.createBookUseCase = createBookUseCase;
     this.findOneBookUseCase = findOneBookUseCase;
-    this.findAllBookUseCase = findAllBookUseCase;
+    this.findAllBooksUseCase = findAllBooksUseCase;
     this.updateOneBookUseCase = updateOneBookUseCase;
     this.deleteOneBookUseCase = deleteOneBookUseCase;
     this.mapper = mapper;
@@ -76,7 +76,7 @@ public class BookController {
   public ResponseEntity<Page<Book>> findAll(
       Pageable pageable
   ) {
-    return ResponseEntity.ok(findAllBookUseCase.findAll(pageable));
+    return ResponseEntity.ok(findAllBooksUseCase.findAll(pageable));
   }
   
   @DeleteMapping("/delete/{id}")

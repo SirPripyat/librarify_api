@@ -18,13 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class FindAllBookUseCaseTest {
+public class FindAllBooksUseCaseTest {
   
   @Mock
   private BookRepository bookRepository;
   
   @InjectMocks
-  private FindAllBookUseCase findAllBookUseCase;
+  private FindAllBooksUseCase findAllBooksUseCase;
   
   @Test
   void findAll_shouldReturnPaginatedUsers() {
@@ -41,7 +41,7 @@ public class FindAllBookUseCaseTest {
     
     when(bookRepository.findAll(pageable)).thenReturn(paginatedBooks);
     
-    Page<Book> result = findAllBookUseCase.findAll(pageable);
+    Page<Book> result = findAllBooksUseCase.findAll(pageable);
     
     assertEquals(paginatedBooks, result);
     assertEquals(6, result.getTotalElements());

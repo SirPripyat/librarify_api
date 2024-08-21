@@ -8,13 +8,19 @@ import org.springframework.data.domain.Pageable;
 /**
  * Caso de uso para obter os detalhes de todos os livros de maneira paginada.
  */
-public class FindAllBookUseCase {
+public class FindAllBooksUseCase {
   private final BookRepository bookRepository;
   
-  public FindAllBookUseCase(BookRepository bookRepository) {
+  public FindAllBooksUseCase(BookRepository bookRepository) {
     this.bookRepository = bookRepository;
   }
   
+  /**
+   * Busca todos os livros de forma paginada.
+   *
+   * @param pageable as informações de paginação
+   * @return uma página contendo as entidades de livros
+   */
   public Page<Book> findAll(Pageable pageable) {
     return bookRepository.findAll(pageable);
   }
