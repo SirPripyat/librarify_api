@@ -1,6 +1,7 @@
 package com.leonardorossi.librarify.presentation.book.dtos;
 
 import com.leonardorossi.librarify.presentation.book.messages.BookValidationMessages;
+import com.leonardorossi.librarify.shared.regexpatterns.RegexPatterns;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -26,12 +27,14 @@ public record CreateBookRequestDto(
     
     @NotBlank(message = BookValidationMessages.AUTHOR_NOT_BLANK)
     @Size(max = 255, message = BookValidationMessages.AUTHOR_SIZE)
-    @Pattern(regexp = "^[A-Za-zÀ-ÿ\\s]+$", message = BookValidationMessages.AUTHOR_ONLY_LETTERS)
+    @Pattern(regexp = RegexPatterns.ONLY_LETTERS,
+      message = BookValidationMessages.AUTHOR_ONLY_LETTERS)
     String author,
     
     @NotBlank(message = BookValidationMessages.ISBN_NOT_BLANK)
     @Size(min = 10, max = 13, message = BookValidationMessages.ISBN_SIZE)
-    @Pattern(regexp = "^[0-9]+$", message = BookValidationMessages.ISBN_ONLY_NUMBERS)
+    @Pattern(regexp = RegexPatterns.ONLY_NUMBERS,
+      message = BookValidationMessages.ISBN_ONLY_NUMBERS)
     String isbn,
     
     @NotNull(message = BookValidationMessages.PUBLICATION_DATE_NOT_NULL)
@@ -39,7 +42,8 @@ public record CreateBookRequestDto(
     
     @NotBlank(message = BookValidationMessages.CATEGORY_NOT_BLANK)
     @Size(max = 50, message = BookValidationMessages.CATEGORY_SIZE)
-    @Pattern(regexp = "^[A-Za-zÀ-ÿ\\s]+$", message = BookValidationMessages.CATEGORY_ONLY_LETTERS)
+    @Pattern(regexp = RegexPatterns.ONLY_LETTERS,
+      message = BookValidationMessages.CATEGORY_ONLY_LETTERS)
     String category
 ) {
 }
