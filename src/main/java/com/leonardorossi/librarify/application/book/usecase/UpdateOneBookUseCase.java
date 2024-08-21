@@ -28,22 +28,28 @@ public class UpdateOneBookUseCase {
   public Book update(Long id, Book book) {
     Book bookToUpdate = findOneBookUseCase.find(id);
     
-    updateFields(bookToUpdate, book);
+    updateBookDetails(bookToUpdate, book);
     
     return bookRepository.save(bookToUpdate);
   }
   
-  private void updateFields(Book bookToUpdate, Book book) {
-    if (book.getTitle() != null) {
-      bookToUpdate.setTitle(book.getTitle());
+  /**
+   * Atualiza os campos do livro existente com os novos valores fornecidos.
+   *
+   * @param bookToUpdate o livro existente a ser atualizado
+   * @param updatedBook o livro com os novos detalhes
+   */
+  private void updateBookDetails(Book bookToUpdate, Book updatedBook) {
+    if (updatedBook.getTitle() != null) {
+      bookToUpdate.setTitle(updatedBook.getTitle());
     }
     
-    if (book.getAuthor() != null) {
-      bookToUpdate.setAuthor(book.getAuthor());
+    if (updatedBook.getAuthor() != null) {
+      bookToUpdate.setAuthor(updatedBook.getAuthor());
     }
     
-    if (book.getCategory() != null) {
-      bookToUpdate.setCategory(book.getCategory());
+    if (updatedBook.getCategory() != null) {
+      bookToUpdate.setCategory(updatedBook.getCategory());
     }
   }
 }
