@@ -52,7 +52,7 @@ public class UpdateOneLoanUseCase {
         && loanToUpdate.getLoanStatus() != LoanStatusEnum.RETURNED;
     
     if (isLate) {
-      loan.setLoanStatus(LoanStatusEnum.LATE);
+      loanToUpdate.setLoanStatus(LoanStatusEnum.LATE);
     } else {
       loanToUpdate.setLoanStatus(loan.getLoanStatus());
     }
