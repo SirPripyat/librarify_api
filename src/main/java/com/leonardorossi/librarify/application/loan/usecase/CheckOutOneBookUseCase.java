@@ -18,6 +18,10 @@ public class CheckOutOneBookUseCase {
   
   /**
    * Construtor da classe.
+   *
+   * @param loanRepository Repositório para salvar o empréstimo.
+   * @param findOneBookUseCase Caso de uso para buscar um livro.
+   * @param findOneUserUseCase Caso de uso para buscar um usuário.
    */
   public CheckOutOneBookUseCase(
       LoanRepository loanRepository,
@@ -44,6 +48,14 @@ public class CheckOutOneBookUseCase {
     return loanRepository.save(buildedLoan);
   }
   
+  /**
+   * Constrói a entidade de empréstimo com as informações necessárias.
+   *
+   * @param loan Entidade de empréstimo original.
+   * @param user Usuário associado ao empréstimo.
+   * @param book Livro associado ao empréstimo.
+   * @return Entidade de empréstimo construída.
+   */
   private Loan buildLoan(Loan loan, User user, Book book) {
     return Loan.builder()
       .user(user)

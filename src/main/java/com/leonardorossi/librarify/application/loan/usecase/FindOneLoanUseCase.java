@@ -11,17 +11,34 @@ import com.leonardorossi.librarify.presentation.loan.messages.LoanExceptionMessa
 public class FindOneLoanUseCase {
   private final LoanRepository loanRepository;
   
+  /**
+   * Construtor para a classe FindOneLoanUseCase.
+   *
+   * @param loanRepository o repositório responsável por buscar o empréstimo pelo ID
+   */
   public FindOneLoanUseCase(LoanRepository loanRepository) {
     this.loanRepository = loanRepository;
   }
   
   /**
-   * Busca um empréstimo pelo id.
+   * Busca um empréstimo pelo ID.
+   *
+   * @param id o ID do empréstimo
+   * @return o empréstimo encontrado
+   * @throws CustomBadRequestException se o empréstimo não for encontrado
    */
   public Loan find(Long id) {
-    return loanRepository.findOneById(id).orElseThrow(() ->
-      new CustomBadRequestException(
-        String.format(LoanExceptionMessages.LOAN_NOT_FOUND, id)
-      ));
+    return loanRepository.findOneById(id).orElseThrow(() -> createLoanNotFoundException(id));
+  }
+  
+  /**
+   * Cria uma exceção personalizada quando o empréstimo não é encontrado.
+   *
+   * @param id o ID do empréstimo
+   * @return uma exceção personalizada com a mensagem apropriada
+   */
+  private CustomBadRequestException createLoanNotFoundException(Long id) {
+    String errorMessage = String.format(LoanExceptionMessages.LOAN_NOT_FOUND, id);
+    return new CustomBadRequestException(errorMessage);
   }
 }

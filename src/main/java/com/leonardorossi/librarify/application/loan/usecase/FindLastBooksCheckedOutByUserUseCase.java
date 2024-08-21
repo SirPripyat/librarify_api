@@ -13,17 +13,34 @@ public class FindLastBooksCheckedOutByUserUseCase {
   
   private final LoanRepository loanRepository;
   
+  /**
+   * Construtor para a classe FindLastBooksCheckedOutByUserUseCase.
+   *
+   * @param loanRepository o repositório responsável por buscar os empréstimos do usuário
+   */
   public FindLastBooksCheckedOutByUserUseCase(LoanRepository loanRepository) {
     this.loanRepository = loanRepository;
   }
   
   /**
-    * Busca os últimos livros emprestados por um usuário.
+   * Busca os últimos livros emprestados por um usuário.
+   *
+   * @param userId o ID do usuário
+   * @return uma lista de livros emprestados
    */
   public List<Book> find(Long userId) {
     return loanRepository.findLastBooksCheckOutByUser(userId).orElseThrow(() ->
-      new CustomBadRequestException(
-        String.format(LoanExceptionMessages.USER_DONT_HAVE_LOANS, userId)
-      ));
+      createCustomBadRequestException(userId));
+  }
+  
+  /**
+   * Cria uma exceção personalizada para o caso de o usuário não ter livros emprestados.
+   *
+   * @param userId o ID do usuário
+   * @return uma exceção personalizada
+   */
+  private CustomBadRequestException createCustomBadRequestException(Long userId) {
+    String errorMessage = String.format(LoanExceptionMessages.USER_DONT_HAVE_LOANS, userId);
+    return new CustomBadRequestException(errorMessage);
   }
 }
