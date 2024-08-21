@@ -17,12 +17,25 @@ public class FindOneBookUseCase {
   }
   
   /**
-   * Busca um livro pelo id.
+   * Busca um livro pelo ID.
+   *
+   * @param id o ID do livro a ser buscado
+   * @return o livro encontrado
+   * @throws CustomBadRequestException se o livro não for encontrado
    */
   public Book find(Long id) {
-    return bookRepository.findOneById(id).orElseThrow(() ->
-      new CustomBadRequestException(
-        String.format(BookExceptionMessages.BOOK_NOT_FOUND, id)
-      ));
+    return bookRepository.findOneById(id).orElseThrow(() -> bookNotFoundException(id));
+  }
+  
+  /**
+   * Cria uma exceção para quando um livro não for encontrado.
+   *
+   * @param id o ID do livro não encontrado
+   * @return a exceção customizada
+   */
+  private CustomBadRequestException bookNotFoundException(Long id) {
+    return new CustomBadRequestException(
+      String.format(BookExceptionMessages.BOOK_NOT_FOUND, id)
+    );
   }
 }
