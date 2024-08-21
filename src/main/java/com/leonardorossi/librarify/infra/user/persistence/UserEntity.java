@@ -49,6 +49,6 @@ public class UserEntity {
   @Column(name = "STATUS", nullable = false)
   private Boolean status;
   
-  @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
   private List<LoanEntity> listOfLoans;
 }

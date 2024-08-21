@@ -52,6 +52,6 @@ public class BookEntity {
   @Column(name = "STATUS", nullable = false)
   private Boolean status;
   
-  @OneToMany(mappedBy = "bookEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "bookEntity", cascade = CascadeType.ALL)
   private List<LoanEntity> listOfLoans;
 }
