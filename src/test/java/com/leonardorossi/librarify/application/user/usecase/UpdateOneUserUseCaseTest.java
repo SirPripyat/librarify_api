@@ -45,6 +45,7 @@ public class UpdateOneUserUseCaseTest {
     User userToUpdate = User.builder()
       .name("Manoel Gomes")
       .email("manoel@mail.com")
+      .phone("987654321")
       .build();
     
     when(findOneUserUseCase.findById(idUser)).thenReturn(existingUser);
@@ -77,6 +78,7 @@ public class UpdateOneUserUseCaseTest {
     User userToUpdate = User.builder()
       .name("Manoel Gomes")
       .email("manoel.gomes@mail.com")
+      .phone("987654321")
       .build();
     
     when(findOneUserUseCase.findById(idUser)).thenReturn(existingUser);
