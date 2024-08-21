@@ -27,7 +27,7 @@ public class FindAllBooksUseCaseTest {
   private FindAllBooksUseCase findAllBooksUseCase;
   
   @Test
-  void findAll_shouldReturnPaginatedUsers() {
+  void shouldReturnPaginatedUsers() {
     Pageable pageable = PageRequest.of(0, 6);
     List<Book> bookList = List.of(
       Book.builder().id(1L).title("Harry Potter and the Sorcerer's Stone").build(),
@@ -41,7 +41,7 @@ public class FindAllBooksUseCaseTest {
     
     when(bookRepository.findAll(pageable)).thenReturn(paginatedBooks);
     
-    Page<Book> result = findAllBooksUseCase.findAll(pageable);
+    Page<Book> result = findAllBooksUseCase.execute(pageable);
     
     assertEquals(paginatedBooks, result);
     assertEquals(6, result.getTotalElements());

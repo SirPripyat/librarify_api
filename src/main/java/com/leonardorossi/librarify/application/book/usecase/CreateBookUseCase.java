@@ -21,7 +21,7 @@ public class CreateBookUseCase {
    * @param book a entidade do livro a ser criada
    * @return a entidade do livro salva
    */
-  public Book create(Book book) {
+  public Book execute(Book book) {
     validateBookDoesNotExist(book);
     
     return bookRepository.save(book);

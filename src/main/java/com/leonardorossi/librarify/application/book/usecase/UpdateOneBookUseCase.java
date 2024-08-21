@@ -25,8 +25,8 @@ public class UpdateOneBookUseCase {
    * @param book a entidade do livro a ser atualizado
    * @return a entidade do livro atualizada
    */
-  public Book update(Long id, Book book) {
-    Book bookToUpdate = findOneBookUseCase.find(id);
+  public Book execute(Long id, Book book) {
+    Book bookToUpdate = findOneBookUseCase.execute(id);
     
     updateBookDetails(bookToUpdate, book);
     

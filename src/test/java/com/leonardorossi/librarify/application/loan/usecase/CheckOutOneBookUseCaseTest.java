@@ -52,7 +52,7 @@ public class CheckOutOneBookUseCaseTest {
       .build();
     
     when(findOneUserUseCase.findById(1L)).thenReturn(mockUser);
-    when(findOneBookUseCase.find(1L)).thenReturn(mockBook);
+    when(findOneBookUseCase.execute(1L)).thenReturn(mockBook);
     when(loanRepository.save(any(Loan.class))).thenReturn(mockLoan);
     
     Loan result = checkOutOneBookUseCase.execute(mockLoan);
@@ -60,6 +60,6 @@ public class CheckOutOneBookUseCaseTest {
     assertEquals(mockLoan, result);
     verify(loanRepository, times(1)).save(any(Loan.class));
     verify(findOneUserUseCase, times(1)).findById(1L);
-    verify(findOneBookUseCase, times(1)).find(1L);
+    verify(findOneBookUseCase, times(1)).execute(1L);
   }
 }

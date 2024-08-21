@@ -9,7 +9,7 @@ public class BookExceptionMessages {
   
   public static final String BOOK_NOT_FOUND = "Book with id: %s not found.";
   
-  public static final String INVALID_ISBN = "Invalid ISBN: %s.";
+  public static final String PAGINATED_BOOKS_NOT_FOUND = "No books found.";
   
   private BookExceptionMessages() {
   }

@@ -45,7 +45,7 @@ public class CreateBookUseCaseTest {
     when(bookRepository.existsByIsbn(validBook.getIsbn())).thenReturn(false);
     when(bookRepository.save(validBook)).thenReturn(validBook);
     
-    Book createdBook = createBookUseCase.create(validBook);
+    Book createdBook = createBookUseCase.execute(validBook);
     
     assertNotNull(createdBook);
     assertEquals(validBook, createdBook);
@@ -59,7 +59,7 @@ public class CreateBookUseCaseTest {
     when(bookRepository.existsByIsbn(validBook.getIsbn())).thenReturn(true);
     
     CustomBadRequestException exception = assertThrows(CustomBadRequestException.class, () ->
-      createBookUseCase.create(validBook)
+      createBookUseCase.execute(validBook)
     );
     
     assertEquals(

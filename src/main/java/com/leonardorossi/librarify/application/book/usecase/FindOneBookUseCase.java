@@ -23,7 +23,7 @@ public class FindOneBookUseCase {
    * @return o livro encontrado
    * @throws CustomBadRequestException se o livro não for encontrado
    */
-  public Book find(Long id) {
+  public Book execute(Long id) {
     return bookRepository.findOneById(id).orElseThrow(() -> bookNotFoundException(id));
   }
   

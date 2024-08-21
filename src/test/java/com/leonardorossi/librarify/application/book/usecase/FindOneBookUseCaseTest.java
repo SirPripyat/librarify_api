@@ -43,7 +43,7 @@ public class FindOneBookUseCaseTest {
     
     when(bookRepository.findOneById(idBook)).thenReturn(Optional.of(mockBook));
     
-    Book result = findOneBookUseCase.find(idBook);
+    Book result = findOneBookUseCase.execute(idBook);
     
     assertEquals(mockBook, result);
   }
@@ -55,7 +55,7 @@ public class FindOneBookUseCaseTest {
     when(bookRepository.findOneById(idBook)).thenReturn(Optional.empty());
     
     CustomBadRequestException exception = assertThrows(CustomBadRequestException.class, () ->
-      findOneBookUseCase.find(idBook)
+      findOneBookUseCase.execute(idBook)
     );
     
     assertEquals(

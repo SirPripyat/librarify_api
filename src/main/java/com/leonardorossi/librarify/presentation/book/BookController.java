@@ -62,28 +62,28 @@ public class BookController {
       @Valid @RequestBody CreateBookRequestDto requestDto
   ) {
     Book book = mapper.toEntity(requestDto);
-    return ResponseEntity.ok(createBookUseCase.create(book));
+    return ResponseEntity.ok(createBookUseCase.execute(book));
   }
   
   @GetMapping("/find-by-id/{id}")
   public ResponseEntity<Book> findOneById(
       @PathVariable Long id
   ) {
-    return ResponseEntity.ok(findOneBookUseCase.find(id));
+    return ResponseEntity.ok(findOneBookUseCase.execute(id));
   }
   
   @GetMapping("/find-all")
   public ResponseEntity<Page<Book>> findAll(
       Pageable pageable
   ) {
-    return ResponseEntity.ok(findAllBooksUseCase.findAll(pageable));
+    return ResponseEntity.ok(findAllBooksUseCase.execute(pageable));
   }
   
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<Book> deleteBook(
       @PathVariable Long id
   ) {
-    return ResponseEntity.ok(deleteOneBookUseCase.toggleStatus(id));
+    return ResponseEntity.ok(deleteOneBookUseCase.execute(id));
   }
   
   /**
@@ -95,7 +95,7 @@ public class BookController {
       @Valid @RequestBody UpdateBookRequestDto requestDto
   ) {
     Book book = mapper.toEntity(requestDto);
-    return ResponseEntity.ok(updateOneBookUseCase.update(id, book));
+    return ResponseEntity.ok(updateOneBookUseCase.execute(id, book));
   }
   
 }

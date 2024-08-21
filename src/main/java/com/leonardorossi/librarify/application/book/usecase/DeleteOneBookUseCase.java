@@ -24,8 +24,8 @@ public class DeleteOneBookUseCase {
    *
    * @param id o ID do livro a ser deletado.
    */
-  public Book toggleStatus(Long id) {
-    Book book = findOneBookUseCase.find(id);
+  public Book execute(Long id) {
+    Book book = findOneBookUseCase.execute(id);
     toggleStatus(book);
     return bookRepository.save(book);
   }

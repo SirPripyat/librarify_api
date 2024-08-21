@@ -31,10 +31,10 @@ public class DeleteOneBookUseCaseTest {
       .status(true)
       .build();
     
-    when(findOneBookUseCase.find(idBook)).thenReturn(existingBook);
+    when(findOneBookUseCase.execute(idBook)).thenReturn(existingBook);
     when(bookRepository.save(existingBook)).thenReturn(existingBook);
     
-    Book updatedBook = deleteOneBookUseCase.toggleStatus(idBook);
+    Book updatedBook = deleteOneBookUseCase.execute(idBook);
     
     assertEquals(false, updatedBook.getStatus());
     verify(bookRepository, times(1)).save(existingBook);
@@ -48,10 +48,10 @@ public class DeleteOneBookUseCaseTest {
       .status(false)
       .build();
     
-    when(findOneBookUseCase.find(idBook)).thenReturn(existingBook);
+    when(findOneBookUseCase.execute(idBook)).thenReturn(existingBook);
     when(bookRepository.save(existingBook)).thenReturn(existingBook);
     
-    Book updatedBook = deleteOneBookUseCase.toggleStatus(idBook);
+    Book updatedBook = deleteOneBookUseCase.execute(idBook);
     
     assertEquals(true, updatedBook.getStatus());
     verify(bookRepository, times(1)).save(existingBook);

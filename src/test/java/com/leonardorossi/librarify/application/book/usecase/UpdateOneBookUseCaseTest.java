@@ -38,15 +38,15 @@ public class UpdateOneBookUseCaseTest {
       .category("Teen")
       .build();
     
-    when(findOneBookUseCase.find(idBook)).thenReturn(existingBook);
+    when(findOneBookUseCase.execute(idBook)).thenReturn(existingBook);
     when(bookRepository.save(existingBook)).thenReturn(existingBook);
     
-    Book updatedBook = updateOneBookUseCase.update(idBook, bookToUpdate);
+    Book updatedBook = updateOneBookUseCase.execute(idBook, bookToUpdate);
 
     assertEquals("Harry Potter and the Philosopher's Stone", updatedBook.getTitle());
     assertEquals("J.K. Rowling", updatedBook.getAuthor());
     
-    verify(findOneBookUseCase, times(1)).find(idBook);
+    verify(findOneBookUseCase, times(1)).execute(idBook);
     verify(bookRepository, times(1)).save(existingBook);
   }
   

@@ -37,7 +37,7 @@ public class CheckOutOneBookUseCase {
    */
   public Loan execute(Loan loan) {
     User user = findOneUserUseCase.findById(loan.getUser().getId());
-    Book book = findOneBookUseCase.find(loan.getBook().getId());
+    Book book = findOneBookUseCase.execute(loan.getBook().getId());
     
     Loan buildedLoan = buildLoan(loan, user, book);
     
