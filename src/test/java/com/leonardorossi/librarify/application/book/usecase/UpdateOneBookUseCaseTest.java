@@ -35,6 +35,7 @@ public class UpdateOneBookUseCaseTest {
     Book bookToUpdate = Book.builder()
       .title("Harry Potter and the Philosopher's Stone")
       .author("J.K. Rowling")
+      .category("Teen")
       .build();
     
     when(findOneBookUseCase.find(idBook)).thenReturn(existingBook);
