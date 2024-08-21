@@ -2,7 +2,7 @@ package com.leonardorossi.librarify.application.loan.usecase;
 
 import com.leonardorossi.librarify.application.loan.gateways.LoanRepository;
 import com.leonardorossi.librarify.domain.book.entity.Book;
-import com.leonardorossi.librarify.infra.exception.CustomBadRequestException;
+import com.leonardorossi.librarify.infra.exception.CustomNoContentRequestException;
 import com.leonardorossi.librarify.presentation.loan.messages.LoanExceptionMessages;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -50,9 +50,8 @@ public class FindLastBooksCheckedOutByUserUseCaseTest {
     
     when(loanRepository.findLastBooksCheckOutByUser(userId)).thenReturn(Optional.empty());
     
-    CustomBadRequestException exception = assertThrows(CustomBadRequestException.class, () ->
-      findLastBooksCheckedOutByUserUseCase.find(userId)
-    );
+    CustomNoContentRequestException exception = assertThrows(CustomNoContentRequestException.class,
+      () -> findLastBooksCheckedOutByUserUseCase.find(userId));
     
     assertEquals(
       String.format(LoanExceptionMessages.USER_DONT_HAVE_LOANS, userId), exception.getMessage()

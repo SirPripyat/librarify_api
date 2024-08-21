@@ -2,7 +2,7 @@ package com.leonardorossi.librarify.application.user.usecase;
 
 import com.leonardorossi.librarify.application.user.gateways.UserRepository;
 import com.leonardorossi.librarify.domain.user.entity.User;
-import com.leonardorossi.librarify.infra.exception.CustomBadRequestException;
+import com.leonardorossi.librarify.infra.exception.CustomNoContentRequestException;
 import com.leonardorossi.librarify.presentation.user.messages.UserExceptionMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,7 +53,7 @@ public class FindOneUserUseCaseTest {
     
     when(userRepository.findOneById(idUser)).thenReturn(Optional.empty());
     
-    CustomBadRequestException exception = assertThrows(CustomBadRequestException.class, () ->
+    CustomNoContentRequestException exception = assertThrows(CustomNoContentRequestException.class, () ->
       findOneUserUseCase.execute(idUser)
     );
     

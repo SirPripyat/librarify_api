@@ -2,7 +2,7 @@ package com.leonardorossi.librarify.application.book.usecase;
 
 import com.leonardorossi.librarify.application.book.gateways.BookRepository;
 import com.leonardorossi.librarify.domain.book.entity.Book;
-import com.leonardorossi.librarify.infra.exception.CustomBadRequestException;
+import com.leonardorossi.librarify.infra.exception.CustomNoContentRequestException;
 import com.leonardorossi.librarify.presentation.book.messages.BookExceptionMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,7 +54,7 @@ public class FindOneBookUseCaseTest {
     
     when(bookRepository.findOneById(idBook)).thenReturn(Optional.empty());
     
-    CustomBadRequestException exception = assertThrows(CustomBadRequestException.class, () ->
+    CustomNoContentRequestException exception = assertThrows(CustomNoContentRequestException.class, () ->
       findOneBookUseCase.execute(idBook)
     );
     
