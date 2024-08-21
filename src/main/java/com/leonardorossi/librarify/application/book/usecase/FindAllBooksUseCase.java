@@ -38,7 +38,6 @@ public class FindAllBooksUseCase {
    * Valida se a página de livros está vazia.
    *
    * @param books a página de livros
-   *
    */
   private void validateBookDoesNotExist(Page<Book> books) {
     if (books.isEmpty()) {

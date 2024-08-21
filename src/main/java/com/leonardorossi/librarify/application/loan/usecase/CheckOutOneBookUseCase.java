@@ -40,7 +40,7 @@ public class CheckOutOneBookUseCase {
    * @return Empréstimo criado.
    */
   public Loan execute(Loan loan) {
-    User user = findOneUserUseCase.findById(loan.getUser().getId());
+    User user = findOneUserUseCase.execute(loan.getUser().getId());
     Book book = findOneBookUseCase.execute(loan.getBook().getId());
     
     Loan buildedLoan = buildLoan(loan, user, book);

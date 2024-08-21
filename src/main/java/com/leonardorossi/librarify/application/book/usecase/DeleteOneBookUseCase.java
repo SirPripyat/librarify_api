@@ -37,9 +37,9 @@ public class DeleteOneBookUseCase {
   }
   
   /**
-   * Toggles the status of the given book.
+   * Altera o status de um livro.
    *
-   * @param book the book entity whose status needs to be toggled.
+   * @param book a entidade de livro que o status será alterado.
    */
   private void toggleStatus(Book book) {
     book.setStatus(!book.getStatus());
