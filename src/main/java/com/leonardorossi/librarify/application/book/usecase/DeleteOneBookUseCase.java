@@ -26,7 +26,16 @@ public class DeleteOneBookUseCase {
    */
   public Book toggleStatus(Long id) {
     Book book = findOneBookUseCase.find(id);
-    book.setStatus(!book.getStatus());
+    toggleStatus(book);
     return bookRepository.save(book);
+  }
+  
+  /**
+   * Toggles the status of the given book.
+   *
+   * @param book the book entity whose status needs to be toggled.
+   */
+  private void toggleStatus(Book book) {
+    book.setStatus(!book.getStatus());
   }
 }
