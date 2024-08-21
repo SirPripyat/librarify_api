@@ -6,11 +6,11 @@ package com.leonardorossi.librarify.presentation.user.messages;
  */
 public class UserExceptionMessages {
   public static final String EMAIL_ALREADY_EXISTS =
-      "User with email: %s already exists.";
+      "Usuário com e-mail: %s já existe.";
   
-  public static final String USER_NOT_FOUND = "User with id: %s not found.";
+  public static final String USER_NOT_FOUND = "Usuário com id: %s não encontrado.";
   
-  public static final String PAGINATED_USERS_NOT_FOUND = "No users found.";
+  public static final String PAGINATED_USERS_NOT_FOUND = "Nenhum usuário encontrado.";
   
   private UserExceptionMessages() {
   }

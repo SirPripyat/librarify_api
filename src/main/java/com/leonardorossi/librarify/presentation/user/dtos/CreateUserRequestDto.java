@@ -1,11 +1,8 @@
 package com.leonardorossi.librarify.presentation.user.dtos;
 
 import com.leonardorossi.librarify.presentation.user.messages.UserValidationMessages;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+
 import java.time.LocalDate;
 import lombok.Builder;
 
@@ -22,6 +19,7 @@ import lombok.Builder;
 public record CreateUserRequestDto(
     @NotBlank(message = UserValidationMessages.NAME_NOT_BLANK)
     @Size(max = 100, message = UserValidationMessages.NAME_SIZE)
+    @Pattern(regexp = "^[A-Za-zÀ-ÖØ-öø-ÿ\\s]+$", message = UserValidationMessages.NAME_ALPHA_ONLY)
     String name,
     
     @NotBlank(message = UserValidationMessages.EMAIL_NOT_BLANK)
@@ -33,6 +31,7 @@ public record CreateUserRequestDto(
     LocalDate registrationDate,
     
     @NotBlank(message = UserValidationMessages.PHONE_NOT_BLANK)
-    @Size(max = 15, message = UserValidationMessages.PHONE_SIZE)
+    @Size(min = 10, max = 11, message = UserValidationMessages.PHONE_SIZE)
+    @Pattern(regexp = "^[0-9]+$", message = UserValidationMessages.PHONE_NUMERIC)
     String phone
 ) {}
