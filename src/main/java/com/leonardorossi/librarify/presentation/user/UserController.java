@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
   
-  private final CreateUserUseCase createUserService;
+  private final CreateUserUseCase createUserUseCase;
   private final FindOneUserUseCase findOneUserUseCase;
   private final FindAllUsersUseCase findAllUsersUseCase;
   private final DeleteOneUserUseCase deleteOneUserUseCase;
@@ -40,16 +40,23 @@ public class UserController {
   
   /**
    * Construtor da classe.
+   *
+   * @param createUserUseCase Caso de uso responsável pela criação de um usuário.
+   * @param findOneUserUseCase Caso de uso responsável por buscar um usuário pelo seu ID.
+   * @param findAllUsersUseCase Caso de uso responsável por buscar todos os usuários com paginação.
+   * @param deleteOneUserUseCase Caso de uso responsável por excluir um usuário.
+   * @param updateOneUserUseCase Caso de uso responsável por atualizar os detalhes de um usuário.
+   * @param userMapper Mapper para converter os DTOs em entidades.
    */
   public UserController(
-      CreateUserUseCase createUserService,
+      CreateUserUseCase createUserUseCase,
       FindOneUserUseCase findOneUserUseCase,
       FindAllUsersUseCase findAllUsersUseCase,
       DeleteOneUserUseCase deleteOneUserUseCase,
       UpdateOneUserUseCase updateOneUserUseCase,
       UserRequestMapper userMapper
   ) {
-    this.createUserService = createUserService;
+    this.createUserUseCase = createUserUseCase;
     this.findOneUserUseCase = findOneUserUseCase;
     this.findAllUsersUseCase = findAllUsersUseCase;
     this.deleteOneUserUseCase = deleteOneUserUseCase;
@@ -57,29 +64,57 @@ public class UserController {
     this.userMapper = userMapper;
   }
   
+  /**
+   * Endpoint para criar um novo usuário.
+   *
+   * @param requestDto Dados do usuário a ser criado.
+   * @return O usuário criado.
+   */
   @PostMapping("/create")
   public ResponseEntity<User> create(@Valid @RequestBody CreateUserRequestDto requestDto) {
     User user = userMapper.toEntity(requestDto);
-    return ResponseEntity.ok(createUserService.execute(user));
+    return ResponseEntity.ok(createUserUseCase.execute(user));
   }
   
+  /**
+   * Endpoint para buscar um usuário pelo seu ID.
+   *
+   * @param id ID do usuário a ser buscado.
+   * @return O usuário correspondente ao ID informado.
+   */
   @GetMapping("/find-by-id/{id}")
   public ResponseEntity<User> findById(@PathVariable Long id) {
     return ResponseEntity.ok(findOneUserUseCase.execute(id));
   }
   
+  /**
+   * Endpoint para buscar todos os usuários com paginação.
+   *
+   * @param pageable Configuração de paginação.
+   * @return Uma página com os usuários encontrados.
+   */
   @GetMapping("/find-all")
   public ResponseEntity<Page<User>> findAll(Pageable pageable) {
     return ResponseEntity.ok(findAllUsersUseCase.execute(pageable));
   }
   
+  /**
+   * Endpoint para excluir um usuário pelo seu ID.
+   *
+   * @param id ID do usuário a ser excluído.
+   * @return O usuário excluído.
+   */
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<User> delete(@PathVariable Long id) {
     return ResponseEntity.ok(deleteOneUserUseCase.execute(id));
   }
   
   /**
-   * Atualiza os detalhes de um único usuário.
+   * Endpoint para atualizar os detalhes de um usuário.
+   *
+   * @param id         ID do usuário a ser atualizado.
+   * @param requestDto Dados atualizados do usuário.
+   * @return O usuário atualizado.
    */
   @PutMapping("/update/{id}")
   public ResponseEntity<User> update(

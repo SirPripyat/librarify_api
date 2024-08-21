@@ -17,12 +17,24 @@ public class RecommendationController {
   
   private final RecommendBookByCategoryUseCase recommendBookByCategoryUseCase;
   
+  /**
+   * Construtor da classe.
+   *
+   * @param recommendBookByCategoryUseCase Caso de uso responsável por recomendar livros com base na
+   *                                      categoria.
+   */
   public RecommendationController(
       RecommendBookByCategoryUseCase recommendBookByCategoryUseCase
   ) {
     this.recommendBookByCategoryUseCase = recommendBookByCategoryUseCase;
   }
   
+  /**
+   * Endpoint para obter recomendações de livros com base na categoria para um usuário específico.
+   *
+   * @param idUser ID do usuário para o qual a recomendação será gerada.
+   * @return A recomendação gerada com base nas categorias de interesse do usuário.
+   */
   @GetMapping("/{idUser}")
   public ResponseEntity<Recommendation> recommendByCategory(
       @PathVariable Long idUser

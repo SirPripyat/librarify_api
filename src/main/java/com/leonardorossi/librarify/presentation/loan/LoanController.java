@@ -34,6 +34,14 @@ public class LoanController {
   
   /**
    * Construtor da classe.
+   *
+   * @param checkOutOneBookUseCase              Caso de uso responsável por criar um
+   *                                            empréstimo de livro.
+   * @param updateOneLoanUseCase                Caso de uso responsável por atualizar os
+   *                                            detalhes de um empréstimo.
+   * @param findLastBooksCheckedOutByUserUseCase Caso de uso responsável por buscar os últimos
+   *                                             livros emprestados por um usuário.
+   * @param mapper                              Mapper para converter os DTOs em entidades.
    */
   public LoanController(
       CheckOutOneBookUseCase checkOutOneBookUseCase,
@@ -47,6 +55,12 @@ public class LoanController {
     this.mapper = mapper;
   }
   
+  /**
+   * Endpoint para criar um novo empréstimo.
+   *
+   * @param requestDto Dados do empréstimo a ser criado.
+   * @return O empréstimo criado.
+   */
   @PostMapping("/create")
   public ResponseEntity<Loan> createLoan(
       @Valid @RequestBody CreateLoanRequestDto requestDto
@@ -55,6 +69,12 @@ public class LoanController {
     return ResponseEntity.ok(checkOutOneBookUseCase.execute(loan));
   }
   
+  /**
+   * Endpoint para buscar os últimos livros emprestados por um usuário.
+   *
+   * @param idUser ID do usuário.
+   * @return A lista dos últimos livros emprestados pelo usuário.
+   */
   @GetMapping("/last/{idUser}")
   public ResponseEntity<List<Book>> findLastBooksCheckOutByUser(
       @PathVariable Long idUser
@@ -63,7 +83,11 @@ public class LoanController {
   }
   
   /**
-   * Atualiza um empréstimo.
+   * Endpoint para atualizar os detalhes de um empréstimo.
+   *
+   * @param id         ID do empréstimo a ser atualizado.
+   * @param requestDto Dados atualizados do empréstimo.
+   * @return O empréstimo atualizado.
    */
   @PutMapping("/update/{id}")
   public ResponseEntity<Loan> updateLoan(

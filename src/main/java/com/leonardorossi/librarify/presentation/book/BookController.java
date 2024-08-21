@@ -12,6 +12,7 @@ import com.leonardorossi.librarify.presentation.book.mapper.BookRequestMapper;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +41,13 @@ public class BookController {
   
   /**
    * Construtor da classe.
+   *
+   * @param createBookUseCase    Caso de uso responsável pela criação de um livro.
+   * @param findOneBookUseCase   Caso de uso responsável por buscar um livro pelo seu ID.
+   * @param findAllBooksUseCase  Caso de uso responsável por buscar todos os livros com paginação.
+   * @param updateOneBookUseCase Caso de uso responsável por atualizar os detalhes de um livro.
+   * @param deleteOneBookUseCase Caso de uso responsável por excluir um livro.
+   * @param mapper               Mapper para converter os DTOs em entidades.
    */
   public BookController(
       CreateBookUseCase createBookUseCase,
@@ -57,14 +65,27 @@ public class BookController {
     this.mapper = mapper;
   }
   
+  /**
+   * Endpoint para criar um novo livro.
+   *
+   * @param requestDto Dados do livro a ser criado.
+   * @return O livro criado com status 201 CREATED.
+   */
   @PostMapping("/create")
   public ResponseEntity<Book> createBook(
       @Valid @RequestBody CreateBookRequestDto requestDto
   ) {
     Book book = mapper.toEntity(requestDto);
-    return ResponseEntity.ok(createBookUseCase.execute(book));
+    Book createdBook = createBookUseCase.execute(book);
+    return ResponseEntity.status(HttpStatus.CREATED).body(createdBook);
   }
   
+  /**
+   * Endpoint para buscar um livro pelo seu ID.
+   *
+   * @param id ID do livro a ser buscado.
+   * @return O livro correspondente ao ID informado.
+   */
   @GetMapping("/find-by-id/{id}")
   public ResponseEntity<Book> findOneById(
       @PathVariable Long id
@@ -72,6 +93,12 @@ public class BookController {
     return ResponseEntity.ok(findOneBookUseCase.execute(id));
   }
   
+  /**
+   * Endpoint para buscar todos os livros com paginação.
+   *
+   * @param pageable Configuração de paginação.
+   * @return Uma página com os livros encontrados.
+   */
   @GetMapping("/find-all")
   public ResponseEntity<Page<Book>> findAll(
       Pageable pageable
@@ -79,6 +106,12 @@ public class BookController {
     return ResponseEntity.ok(findAllBooksUseCase.execute(pageable));
   }
   
+  /**
+   * Endpoint para excluir um livro pelo seu ID.
+   *
+   * @param id ID do livro a ser excluído.
+   * @return O livro excluído.
+   */
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<Book> deleteBook(
       @PathVariable Long id
@@ -87,7 +120,11 @@ public class BookController {
   }
   
   /**
-   * Atualiza os detalhes de um único livro.
+   * Endpoint para atualizar os detalhes de um livro.
+   *
+   * @param id         ID do livro a ser atualizado.
+   * @param requestDto Dados atualizados do livro.
+   * @return O livro atualizado.
    */
   @PutMapping("/update/{id}")
   public ResponseEntity<Book> updateBook(
