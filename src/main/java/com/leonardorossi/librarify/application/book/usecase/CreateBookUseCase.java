@@ -11,6 +11,11 @@ import com.leonardorossi.librarify.presentation.book.messages.BookExceptionMessa
 public class CreateBookUseCase {
   private final BookRepository bookRepository;
   
+  /**
+   * Construtor para a classe CreateBookUseCase.
+   *
+   * @param bookRepository o repositório responsável por salvar e validar a existência do livro
+   */
   public CreateBookUseCase(BookRepository bookRepository) {
     this.bookRepository = bookRepository;
   }

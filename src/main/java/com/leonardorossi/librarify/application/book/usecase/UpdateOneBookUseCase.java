@@ -10,12 +10,19 @@ public class UpdateOneBookUseCase {
   private final BookRepository bookRepository;
   private final FindOneBookUseCase findOneBookUseCase;
   
+  /**
+   * Construtor para a classe UpdateOneBookUseCase.
+   *
+   * @param bookRepository    o repositório responsável por salvar o livro atualizado
+   * @param findOneBookUseCase o caso de uso responsável por buscar o livro pelo ID antes de
+   *                           atualizá-lo
+   */
   public UpdateOneBookUseCase(
       BookRepository bookRepository,
-      FindOneBookUseCase findOneBookUseCase1
+      FindOneBookUseCase findOneBookUseCase
   ) {
     this.bookRepository = bookRepository;
-    this.findOneBookUseCase = findOneBookUseCase1;
+    this.findOneBookUseCase = findOneBookUseCase;
   }
   
   /**

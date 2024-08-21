@@ -12,6 +12,11 @@ public class FindOneBookUseCase {
   
   private final BookRepository bookRepository;
   
+  /**
+   * Construtor para a classe FindOneBookUseCase.
+   *
+   * @param bookRepository o repositório responsável por buscar o livro pelo ID
+   */
   public FindOneBookUseCase(BookRepository bookRepository) {
     this.bookRepository = bookRepository;
   }

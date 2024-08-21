@@ -11,6 +11,12 @@ public class DeleteOneBookUseCase {
   private final BookRepository bookRepository;
   private final FindOneBookUseCase findOneBookUseCase;
   
+  /**
+   * Construtor para a classe DeleteOneBookUseCase.
+   *
+   * @param bookRepository    o repositório responsável por salvar o estado atualizado do livro
+   * @param findOneBookUseCase o caso de uso responsável por buscar o livro pelo ID
+   */
   public DeleteOneBookUseCase(
       BookRepository bookRepository,
       FindOneBookUseCase findOneBookUseCase

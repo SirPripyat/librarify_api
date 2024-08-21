@@ -13,6 +13,11 @@ import org.springframework.data.domain.Pageable;
 public class FindAllBooksUseCase {
   private final BookRepository bookRepository;
   
+  /**
+   * Construtor para a classe FindAllBooksUseCase.
+   *
+   * @param bookRepository o repositório responsável por buscar os livros de maneira paginada
+   */
   public FindAllBooksUseCase(BookRepository bookRepository) {
     this.bookRepository = bookRepository;
   }
