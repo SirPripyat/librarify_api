@@ -22,9 +22,6 @@ public class CreateBookUseCaseTest {
   @Mock
   private BookRepository bookRepository;
   
-  @Mock
-  private ValidateIsbnUseCase validateIsbnUseCase;
-  
   @InjectMocks
   private CreateBookUseCase createBookUseCase;
   
@@ -57,7 +54,6 @@ public class CreateBookUseCaseTest {
   @Test
   void shouldCreateBook() {
     when(bookRepository.existsByIsbn(validBook.getIsbn())).thenReturn(false);
-    when(validateIsbnUseCase.execute(validBook.getIsbn())).thenReturn(true);
     when(bookRepository.save(validBook)).thenReturn(validBook);
     
     Book createdBook = createBookUseCase.create(validBook);
@@ -66,7 +62,6 @@ public class CreateBookUseCaseTest {
     assertEquals(validBook, createdBook);
     
     verify(bookRepository, times(1)).save(validBook);
-    verify(validateIsbnUseCase, times(1)).execute(validBook.getIsbn());
     verify(bookRepository, times(1)).save(validBook);
   }
   
@@ -88,7 +83,6 @@ public class CreateBookUseCaseTest {
   @Test
   void shouldThrowCustomBadRequestExceptionWhenIsbnIsInvalid() {
     when(bookRepository.existsByIsbn(invalidBook.getIsbn())).thenReturn(false);
-    when(validateIsbnUseCase.execute(invalidBook.getIsbn())).thenReturn(false);
     
     CustomBadRequestException exception = assertThrows(CustomBadRequestException.class, () ->
       createBookUseCase.create(invalidBook)
@@ -96,7 +90,6 @@ public class CreateBookUseCaseTest {
     
     assertEquals(String.format(BookExceptionMessages.INVALID_ISBN, invalidBook.getIsbn()), exception.getMessage());
     verify(bookRepository, times(1)).existsByIsbn(invalidBook.getIsbn());
-    verify(validateIsbnUseCase, times(1)).execute(invalidBook.getIsbn());
     verify(bookRepository, never()).save(any(Book.class));
   }
   

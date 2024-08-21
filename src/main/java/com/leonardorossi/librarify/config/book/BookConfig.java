@@ -6,7 +6,6 @@ import com.leonardorossi.librarify.application.book.usecase.DeleteOneBookUseCase
 import com.leonardorossi.librarify.application.book.usecase.FindAllBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.FindOneBookUseCase;
 import com.leonardorossi.librarify.application.book.usecase.UpdateOneBookUseCase;
-import com.leonardorossi.librarify.application.book.usecase.ValidateIsbnUseCase;
 import com.leonardorossi.librarify.infra.book.gateways.BookRepositoryAdapter;
 import com.leonardorossi.librarify.infra.book.mapper.BookEntityMapper;
 import com.leonardorossi.librarify.infra.book.persistence.BookJpaRepository;
@@ -20,18 +19,11 @@ import org.springframework.context.annotation.Configuration;
 public class BookConfig {
   @Bean
   CreateBookUseCase createBookRequestDto(
-      BookRepository bookRepository,
-      ValidateIsbnUseCase validateIsbnUseCase
+      BookRepository bookRepository
   ) {
     return new CreateBookUseCase(
-      bookRepository,
-      validateIsbnUseCase
+      bookRepository
     );
-  }
-  
-  @Bean
-  ValidateIsbnUseCase validateIsbnUseCase() {
-    return new ValidateIsbnUseCase();
   }
   
   @Bean

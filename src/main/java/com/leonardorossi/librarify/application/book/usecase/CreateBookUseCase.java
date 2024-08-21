@@ -10,11 +10,9 @@ import com.leonardorossi.librarify.presentation.book.messages.BookExceptionMessa
  */
 public class CreateBookUseCase {
   private final BookRepository bookRepository;
-  private final ValidateIsbnUseCase validateIsbnUseCase;
   
-  public CreateBookUseCase(BookRepository bookRepository, ValidateIsbnUseCase validateIsbnUseCase) {
+  public CreateBookUseCase(BookRepository bookRepository) {
     this.bookRepository = bookRepository;
-    this.validateIsbnUseCase = validateIsbnUseCase;
   }
   
   /**
@@ -27,14 +25,6 @@ public class CreateBookUseCase {
     if (bookRepository.existsByIsbn(book.getIsbn())) {
       throw new CustomBadRequestException(
         String.format(BookExceptionMessages.ISBN_ALREADY_EXISTS, book.getIsbn())
-      );
-    }
-    
-    boolean isIsbnValid = validateIsbnUseCase.execute(book.getIsbn());
-    
-    if (!isIsbnValid) {
-      throw new CustomBadRequestException(
-        String.format(BookExceptionMessages.INVALID_ISBN, book.getIsbn())
       );
     }
     
