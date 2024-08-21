@@ -3,6 +3,7 @@ package com.leonardorossi.librarify.application.loan.usecase;
 import com.leonardorossi.librarify.application.loan.gateways.LoanRepository;
 import com.leonardorossi.librarify.domain.loan.entity.Loan;
 import com.leonardorossi.librarify.infra.exception.CustomBadRequestException;
+import com.leonardorossi.librarify.infra.exception.CustomNoContentRequestException;
 import com.leonardorossi.librarify.presentation.loan.messages.LoanExceptionMessages;
 
 /**
@@ -37,8 +38,8 @@ public class FindOneLoanUseCase {
    * @param id o ID do empréstimo
    * @return uma exceção personalizada com a mensagem apropriada
    */
-  private CustomBadRequestException createLoanNotFoundException(Long id) {
+  private CustomNoContentRequestException createLoanNotFoundException(Long id) {
     String errorMessage = String.format(LoanExceptionMessages.LOAN_NOT_FOUND, id);
-    return new CustomBadRequestException(errorMessage);
+    return new CustomNoContentRequestException(errorMessage);
   }
 }

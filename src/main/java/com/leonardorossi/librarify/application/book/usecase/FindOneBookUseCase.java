@@ -3,6 +3,7 @@ package com.leonardorossi.librarify.application.book.usecase;
 import com.leonardorossi.librarify.application.book.gateways.BookRepository;
 import com.leonardorossi.librarify.domain.book.entity.Book;
 import com.leonardorossi.librarify.infra.exception.CustomBadRequestException;
+import com.leonardorossi.librarify.infra.exception.CustomNoContentRequestException;
 import com.leonardorossi.librarify.presentation.book.messages.BookExceptionMessages;
 
 /**
@@ -38,8 +39,8 @@ public class FindOneBookUseCase {
    * @param id o ID do livro não encontrado
    * @return a exceção customizada
    */
-  private CustomBadRequestException bookNotFoundException(Long id) {
-    return new CustomBadRequestException(
+  private CustomNoContentRequestException bookNotFoundException(Long id) {
+    return new CustomNoContentRequestException(
       String.format(BookExceptionMessages.BOOK_NOT_FOUND, id)
     );
   }

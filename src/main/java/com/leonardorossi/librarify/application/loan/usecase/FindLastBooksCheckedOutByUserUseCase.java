@@ -2,7 +2,7 @@ package com.leonardorossi.librarify.application.loan.usecase;
 
 import com.leonardorossi.librarify.application.loan.gateways.LoanRepository;
 import com.leonardorossi.librarify.domain.book.entity.Book;
-import com.leonardorossi.librarify.infra.exception.CustomBadRequestException;
+import com.leonardorossi.librarify.infra.exception.CustomNoContentRequestException;
 import com.leonardorossi.librarify.presentation.loan.messages.LoanExceptionMessages;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class FindLastBooksCheckedOutByUserUseCase {
    */
   public List<Book> find(Long userId) {
     return loanRepository.findLastBooksCheckOutByUser(userId).orElseThrow(() ->
-      createCustomBadRequestException(userId));
+      createNoContentRequestException(userId));
   }
   
   /**
@@ -39,8 +39,8 @@ public class FindLastBooksCheckedOutByUserUseCase {
    * @param userId o ID do usuário
    * @return uma exceção personalizada
    */
-  private CustomBadRequestException createCustomBadRequestException(Long userId) {
+  private CustomNoContentRequestException createNoContentRequestException(Long userId) {
     String errorMessage = String.format(LoanExceptionMessages.USER_DONT_HAVE_LOANS, userId);
-    return new CustomBadRequestException(errorMessage);
+    return new CustomNoContentRequestException(errorMessage);
   }
 }
