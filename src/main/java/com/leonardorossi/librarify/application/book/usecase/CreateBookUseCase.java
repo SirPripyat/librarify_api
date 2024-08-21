@@ -28,9 +28,9 @@ public class CreateBookUseCase {
   }
   
   /**
-   * Validates if a book with the same ISBN already exists.
+   * Valida se um livro com ISBN já existe.
    *
-   * @param book the book entity to be validated
+   * @param book a entidade book para ser validada
    */
   private void validateBookDoesNotExist(Book book) {
     if (bookRepository.existsByIsbn(book.getIsbn())) {
