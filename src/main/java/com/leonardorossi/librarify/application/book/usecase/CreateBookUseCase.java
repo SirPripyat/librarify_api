@@ -22,13 +22,21 @@ public class CreateBookUseCase {
    * @return a entidade do livro salva
    */
   public Book create(Book book) {
+    validateBookDoesNotExist(book);
+    
+    return bookRepository.save(book);
+  }
+  
+  /**
+   * Validates if a book with the same ISBN already exists.
+   *
+   * @param book the book entity to be validated
+   */
+  private void validateBookDoesNotExist(Book book) {
     if (bookRepository.existsByIsbn(book.getIsbn())) {
       throw new CustomBadRequestException(
         String.format(BookExceptionMessages.ISBN_ALREADY_EXISTS, book.getIsbn())
       );
     }
-    
-    return bookRepository.save(book);
   }
-  
 }

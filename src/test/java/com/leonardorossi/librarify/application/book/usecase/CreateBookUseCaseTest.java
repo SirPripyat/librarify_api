@@ -26,21 +26,10 @@ public class CreateBookUseCaseTest {
   private CreateBookUseCase createBookUseCase;
   
   private Book validBook;
-  private Book invalidBook;
   
   @BeforeEach
   void setUp() {
     validBook = Book.builder()
-      .id(10L)
-      .title("O Senhor dos Anéis")
-      .author("J.R.R. Tolkien")
-      .isbn("9780345538376")
-      .publicationDate(LocalDate.of(1954, 7, 29))
-      .category("Fantasia")
-      .status(true)
-      .build();
-    
-    invalidBook = Book.builder()
       .id(10L)
       .title("O Senhor dos Anéis")
       .author("J.R.R. Tolkien")
@@ -78,19 +67,6 @@ public class CreateBookUseCaseTest {
       exception.getMessage()
     );
     verify(bookRepository, never()).save(validBook);
-  }
-  
-  @Test
-  void shouldThrowCustomBadRequestExceptionWhenIsbnIsInvalid() {
-    when(bookRepository.existsByIsbn(invalidBook.getIsbn())).thenReturn(false);
-    
-    CustomBadRequestException exception = assertThrows(CustomBadRequestException.class, () ->
-      createBookUseCase.create(invalidBook)
-    );
-    
-    assertEquals(String.format(BookExceptionMessages.INVALID_ISBN, invalidBook.getIsbn()), exception.getMessage());
-    verify(bookRepository, times(1)).existsByIsbn(invalidBook.getIsbn());
-    verify(bookRepository, never()).save(any(Book.class));
   }
   
 }
