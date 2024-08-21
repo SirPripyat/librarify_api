@@ -10,6 +10,8 @@ public class UserExceptionMessages {
   
   public static final String USER_NOT_FOUND = "User with id: %s not found.";
   
+  public static final String PAGINATED_USERS_NOT_FOUND = "No users found.";
+  
   private UserExceptionMessages() {
   }
 }

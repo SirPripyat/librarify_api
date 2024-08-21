@@ -11,6 +11,11 @@ import com.leonardorossi.librarify.presentation.user.messages.UserExceptionMessa
 public class FindOneUserUseCase {
   private final UserRepository userRepository;
   
+  /**
+   * Construtor para inicializar o repositório de usuários.
+   *
+   * @param userRepository o repositório responsável pelas operações de persistência de usuários
+   */
   public FindOneUserUseCase(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
@@ -22,11 +27,20 @@ public class FindOneUserUseCase {
    * @return a entidade do usuário
    * @throws CustomBadRequestException se o usuário não existir.
    */
-  public User findById(Long id) {
+  public User execute(Long id) {
     return userRepository.findOneById(id)
-      .orElseThrow(() -> new CustomBadRequestException(
-          String.format(UserExceptionMessages.USER_NOT_FOUND, id)
-        )
+      .orElseThrow(() -> bookNotFoundException(id));
+  }
+  
+  /**
+   * Cria uma exceção para quando um usuário não for encontrado.
+   *
+   * @param id o ID do usuário não encontrado
+   * @return a exceção customizada
+   */
+  private CustomBadRequestException bookNotFoundException(Long id) {
+    return new CustomBadRequestException(
+      String.format(UserExceptionMessages.USER_NOT_FOUND, id)
     );
   }
 }

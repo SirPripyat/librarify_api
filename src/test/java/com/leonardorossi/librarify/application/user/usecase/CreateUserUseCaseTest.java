@@ -38,7 +38,7 @@ public class CreateUserUseCaseTest {
     when(userRepository.existsByEmail(user.getEmail())).thenReturn(false);
     when(userRepository.save(user)).thenReturn(user);
     
-    User createdUser = createUserUseCase.create(user);
+    User createdUser = createUserUseCase.execute(user);
     
     assertEquals(user, createdUser);
     verify(userRepository, times(1)).save(user);
@@ -57,7 +57,7 @@ public class CreateUserUseCaseTest {
     when(userRepository.existsByEmail(user.getEmail())).thenReturn(true);
     
     CustomBadRequestException exception = assertThrows(CustomBadRequestException.class, () ->
-      createUserUseCase.create(user)
+      createUserUseCase.execute(user)
     );
 
     assertEquals(String.format(UserExceptionMessages.EMAIL_ALREADY_EXISTS, user.getEmail()),

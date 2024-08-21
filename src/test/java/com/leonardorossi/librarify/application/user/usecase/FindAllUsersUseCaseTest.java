@@ -41,7 +41,7 @@ public class FindAllUsersUseCaseTest {
     
     when(userRepository.findAll(pageable)).thenReturn(paginatedUsers);
     
-    Page<User> result = findAllUsersUseCase.findAll(pageable);
+    Page<User> result = findAllUsersUseCase.execute(pageable);
     
     assertEquals(6, result.getTotalElements());
     assertEquals(6, result.getContent().size());

@@ -48,16 +48,16 @@ public class UpdateOneUserUseCaseTest {
       .phone("987654321")
       .build();
     
-    when(findOneUserUseCase.findById(idUser)).thenReturn(existingUser);
+    when(findOneUserUseCase.execute(idUser)).thenReturn(existingUser);
     when(userRepository.existsByEmail(userToUpdate.getEmail())).thenReturn(false);
     when(userRepository.save(existingUser)).thenReturn(existingUser);
     
-    User updatedUser = updateOneUserUseCase.update(idUser, userToUpdate);
+    User updatedUser = updateOneUserUseCase.execute(idUser, userToUpdate);
     
     assertEquals("Manoel Gomes", updatedUser.getName());
     assertEquals("manoel@mail.com", updatedUser.getEmail());
     
-    verify(findOneUserUseCase, times(1)).findById(idUser);
+    verify(findOneUserUseCase, times(1)).execute(idUser);
     verify(userRepository).existsByEmail(existingUser.getEmail());
     verify(userRepository, times(1)).save(existingUser);
   }
@@ -81,11 +81,11 @@ public class UpdateOneUserUseCaseTest {
       .phone("987654321")
       .build();
     
-    when(findOneUserUseCase.findById(idUser)).thenReturn(existingUser);
+    when(findOneUserUseCase.execute(idUser)).thenReturn(existingUser);
     when(userRepository.existsByEmail(userToUpdate.getEmail())).thenReturn(true);
     
     CustomBadRequestException exception = assertThrows(CustomBadRequestException.class, () ->
-      updateOneUserUseCase.update(idUser, userToUpdate)
+      updateOneUserUseCase.execute(idUser, userToUpdate)
     );
     
     assertEquals(

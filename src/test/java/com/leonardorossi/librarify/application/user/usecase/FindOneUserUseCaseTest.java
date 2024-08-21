@@ -42,7 +42,7 @@ public class FindOneUserUseCaseTest {
     
     when(userRepository.findOneById(idUser)).thenReturn(Optional.of(mockUser));
     
-    User result = findOneUserUseCase.findById(idUser);
+    User result = findOneUserUseCase.execute(idUser);
     
     assertEquals(mockUser, result);
   }
@@ -54,7 +54,7 @@ public class FindOneUserUseCaseTest {
     when(userRepository.findOneById(idUser)).thenReturn(Optional.empty());
     
     CustomBadRequestException exception = assertThrows(CustomBadRequestException.class, () ->
-      findOneUserUseCase.findById(idUser)
+      findOneUserUseCase.execute(idUser)
     );
     
     assertEquals(

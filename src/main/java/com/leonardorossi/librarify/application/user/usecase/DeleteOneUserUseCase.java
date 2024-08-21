@@ -11,6 +11,13 @@ public class DeleteOneUserUseCase {
   private final UserRepository userRepository;
   private final FindOneUserUseCase findOneUserUseCase;
   
+  /**
+   * Construtor para inicializar as dependências necessárias.
+   *
+   * @param userRepository      o repositório responsável pelas operações de persistência de
+   *                            usuários
+   * @param findOneUserUseCase  o caso de uso responsável por buscar um usuário pelo ID
+   */
   public DeleteOneUserUseCase(
       UserRepository userRepository, FindOneUserUseCase findOneUserUseCase
   ) {
@@ -19,13 +26,23 @@ public class DeleteOneUserUseCase {
   }
   
   /**
-   * Deleta um usuário se ele existir.
+   * Alterna o status de um usuário, se ele existir.
    *
-   * @param id o ID do usuário a ser deletado
+   * @param id o ID do usuário cujo status será alternado
+   * @return o usuário com o status atualizado
    */
-  public User toggleStatus(Long id) {
-    User user = findOneUserUseCase.findById(id);
-    user.setStatus(!user.getStatus());
+  public User execute(Long id) {
+    User user = findOneUserUseCase.execute(id);
+    toggleStatus(user);
     return userRepository.save(user);
+  }
+  
+  /**
+   * Altera o status de um usuário.
+   *
+   * @param user a entidade de usuário que o status irá ser alterado
+   */
+  private void toggleStatus(User user) {
+    user.setStatus(!user.getStatus());
   }
 }

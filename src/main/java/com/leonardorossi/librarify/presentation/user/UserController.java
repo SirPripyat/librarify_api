@@ -60,22 +60,22 @@ public class UserController {
   @PostMapping("/create")
   public ResponseEntity<User> create(@Valid @RequestBody CreateUserRequestDto requestDto) {
     User user = userMapper.toEntity(requestDto);
-    return ResponseEntity.ok(createUserService.create(user));
+    return ResponseEntity.ok(createUserService.execute(user));
   }
   
   @GetMapping("/find-by-id/{id}")
   public ResponseEntity<User> findById(@PathVariable Long id) {
-    return ResponseEntity.ok(findOneUserUseCase.findById(id));
+    return ResponseEntity.ok(findOneUserUseCase.execute(id));
   }
   
   @GetMapping("/find-all")
   public ResponseEntity<Page<User>> findAll(Pageable pageable) {
-    return ResponseEntity.ok(findAllUsersUseCase.findAll(pageable));
+    return ResponseEntity.ok(findAllUsersUseCase.execute(pageable));
   }
   
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<User> delete(@PathVariable Long id) {
-    return ResponseEntity.ok(deleteOneUserUseCase.toggleStatus(id));
+    return ResponseEntity.ok(deleteOneUserUseCase.execute(id));
   }
   
   /**
@@ -87,6 +87,6 @@ public class UserController {
       @Valid @RequestBody UpdateUserRequestDto requestDto
   ) {
     User userEntity = userMapper.toEntity(requestDto);
-    return ResponseEntity.ok(updateOneUserUseCase.update(id, userEntity));
+    return ResponseEntity.ok(updateOneUserUseCase.execute(id, userEntity));
   }
 }

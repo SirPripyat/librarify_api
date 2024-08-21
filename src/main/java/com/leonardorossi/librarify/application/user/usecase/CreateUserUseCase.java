@@ -13,24 +13,38 @@ public class CreateUserUseCase {
   
   private final UserRepository userRepository;
   
+  /**
+   * Construtor para inicializar o repositório de usuários.
+   *
+   * @param userRepository o repositório responsável pelas operações de persistência de usuários
+   */
   public CreateUserUseCase(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
   
   /**
-   * Cria um novo usuário se o e-mail ainda não existir.
+   * Cria um novo usuário, se o e-mail ainda não existir.
    *
    * @param user a entidade do usuário a ser criada
    * @return a entidade do usuário salva
    * @throws CustomBadRequestException se um usuário com o e-mail fornecido já existir
    */
-  public User create(User user) {
-    if (userRepository.existsByEmail(user.getEmail())) {
+  public User execute(User user) {
+    validateEmailUniqueness(user.getEmail());
+    return userRepository.save(user);
+  }
+  
+  /**
+   * Valida se o e-mail fornecido já está em uso.
+   *
+   * @param email o e-mail a ser verificado
+   * @throws CustomBadRequestException se um usuário com o e-mail fornecido já existir
+   */
+  private void validateEmailUniqueness(String email) {
+    if (userRepository.existsByEmail(email)) {
       throw new CustomBadRequestException(
-        String.format(UserExceptionMessages.EMAIL_ALREADY_EXISTS, user.getEmail())
+        String.format(UserExceptionMessages.EMAIL_ALREADY_EXISTS, email)
       );
     }
-    
-    return userRepository.save(user);
   }
 }

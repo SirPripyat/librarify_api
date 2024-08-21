@@ -31,10 +31,10 @@ public class DeleteOneUserUseCaseTest {
       .status(true)
       .build();
     
-    when(findOneUserUseCase.findById(userId)).thenReturn(existingUser);
+    when(findOneUserUseCase.execute(userId)).thenReturn(existingUser);
     when(userRepository.save(existingUser)).thenReturn(existingUser);
     
-    User updatedUser = deleteOneUserUseCase.toggleStatus(userId);
+    User updatedUser = deleteOneUserUseCase.execute(userId);
     
     assertEquals(false, updatedUser.getStatus());
     verify(userRepository, times(1)).save(existingUser);
@@ -48,10 +48,10 @@ public class DeleteOneUserUseCaseTest {
       .status(false)
       .build();
     
-    when(findOneUserUseCase.findById(userId)).thenReturn(existingUser);
+    when(findOneUserUseCase.execute(userId)).thenReturn(existingUser);
     when(userRepository.save(existingUser)).thenReturn(existingUser);
     
-    User updatedUser = deleteOneUserUseCase.toggleStatus(userId);
+    User updatedUser = deleteOneUserUseCase.execute(userId);
     
     assertEquals(true, updatedUser.getStatus());
     verify(userRepository, times(1)).save(existingUser);
