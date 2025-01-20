@@ -29,14 +29,7 @@ Antes de começar, certifique-se de ter instalado:
    cd librarify_api
    
 2. **Configure o banco de dados:**
-A aplicação utiliza PostgreSQL. Utilize as credenciais abaixo para conectar no banco de dados da AWS:
-**Configure o banco de dados:**
-
-   ```bash
-   HOST: jdbc:postgresql://librarify.cpigmacucmaw.us-east-2.rds.amazonaws.com:5432/postgres
-   DATABASE: postgres
-   USER: postgres
-   PASSWORD: dijsEj-macbax-4zyjxa
+A aplicação utiliza PostgreSQL.
 
 ## Executando a Aplicação
 Você pode rodar a aplicação utilizando Maven:
